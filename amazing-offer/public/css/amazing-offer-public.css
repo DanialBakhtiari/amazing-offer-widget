@@ -1,0 +1,380 @@
+/**
+ * Amazing Offer — front-end styles (RTL-first).
+ */
+
+:root {
+	--ao-primary: #1a1a2e;
+	--ao-primary-hover: #e04a1f;
+	--ao-badge: #e04a1f;
+	--ao-dark: #1a1a2e;
+	--ao-radius: 12px;
+	--ao-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+	--ao-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+.amazing-offer-wrapper {
+	direction: rtl;
+	font-family: inherit;
+	max-width: 100%;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.amazing-offer-wrapper *,
+.amazing-offer-wrapper *::before,
+.amazing-offer-wrapper *::after {
+	box-sizing: border-box;
+}
+
+/* Header */
+.amazing-offer-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 22px;
+	flex-wrap: wrap;
+}
+
+.amazing-offer-title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	font-size: 1.6em;
+	color: var(--ao-dark);
+}
+
+.amazing-offer-icon {
+	color: var(--ao-badge);
+	animation: ao-flash 1.6s infinite;
+}
+
+@keyframes ao-flash {
+	0%, 100% { opacity: 1; transform: scale(1); }
+	50% { opacity: 0.5; transform: scale(1.15); }
+}
+
+.amazing-offer-subtitle {
+	margin: 4px 0 0;
+	color: #777;
+	font-size: 0.9em;
+}
+
+/* Timer */
+.amazing-offer-timer {
+	display: flex;
+	gap: 8px;
+}
+
+.ao-timer-box {
+	background: var(--ao-dark);
+	color: #fff;
+	border-radius: 10px;
+	padding: 8px 10px;
+	min-width: 52px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.ao-timer-num {
+	font-size: 1.3em;
+	font-weight: 700;
+	line-height: 1;
+	font-variant-numeric: tabular-nums;
+}
+
+.ao-timer-label {
+	font-size: 0.65em;
+	opacity: 0.8;
+}
+
+/* Slider shell */
+.amazing-offer-wrapper .amazing-offer-slider {
+	position: relative;
+	overflow: hidden;
+}
+
+.amazing-offer-track {
+	display: flex;
+	gap: 16px;
+	transition: transform 0.45s ease;
+	will-change: transform;
+}
+
+/* Grid mode */
+.amazing-offer-mode-grid {
+	overflow: visible;
+}
+
+.amazing-offer-mode-grid .amazing-offer-track {
+	flex-wrap: wrap;
+	transform: none !important;
+}
+
+/* Card */
+.amazing-offer-card {
+	background: #fff;
+	border: 1px solid #eef0f3;
+	border-radius: var(--ao-radius);
+	box-shadow: var(--ao-shadow);
+	overflow: hidden;
+	flex: 0 0 auto;
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+	display: flex;
+	flex-direction: column;
+}
+
+.amazing-offer-card:hover {
+	transform: translateY(-4px);
+	box-shadow: var(--ao-shadow-hover);
+}
+
+.amazing-offer-card-media {
+	position: relative;
+	overflow: hidden;
+}
+
+.amazing-offer-card-media img {
+	width: 100%;
+	height: auto;
+	display: block;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+}
+
+.amazing-offer-badge {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: var(--ao-badge);
+	color: #fff;
+	font-weight: 700;
+	font-size: 0.85em;
+	padding: 4px 10px;
+	border-radius: 20px;
+	z-index: 2;
+}
+
+.amazing-offer-card-body {
+	padding: 14px 16px 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	flex: 1;
+}
+
+.amazing-offer-card-title {
+	margin: 0;
+	font-size: 1em;
+	line-height: 1.5;
+}
+
+.amazing-offer-card-title a {
+	color: var(--ao-dark);
+	text-decoration: none;
+}
+
+.amazing-offer-card-title a:hover {
+	color: var(--ao-primary-hover);
+}
+
+.amazing-offer-card-price {
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.amazing-offer-regular-price {
+	color: #999;
+	font-size: 0.85em;
+}
+
+.amazing-offer-sale-price {
+	color: var(--ao-primary-hover);
+	font-weight: 700;
+	font-size: 1.05em;
+}
+
+/* Modules */
+.amazing-offer-modules {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.amazing-offer-module {
+	font-size: 0.78em;
+	color: #666;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.amazing-offer-module .dashicons {
+	font-size: 15px;
+	width: 15px;
+	height: 15px;
+	color: var(--ao-badge);
+}
+
+/* Add to cart */
+.amazing-offer-add-to-cart {
+	margin-top: auto;
+	background: var(--ao-primary);
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	padding: 10px 14px;
+	font-size: 0.92em;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.2s ease;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+
+.amazing-offer-add-to-cart:hover {
+	background: var(--ao-primary-hover);
+}
+
+.amazing-offer-add-to-cart.is-disabled,
+.amazing-offer-add-to-cart[disabled] {
+	background: #c8c8d0;
+	cursor: not-allowed;
+}
+
+.amazing-offer-add-to-cart.is-loading .ao-btn-text {
+	opacity: 0.5;
+}
+
+.ao-btn-spinner {
+	display: none;
+	width: 16px;
+	height: 16px;
+	border: 2px solid rgba(255, 255, 255, 0.4);
+	border-top-color: #fff;
+	border-radius: 50%;
+	animation: ao-spin 0.7s linear infinite;
+}
+
+.amazing-offer-add-to-cart.is-loading .ao-btn-spinner {
+	display: inline-block;
+}
+
+.amazing-offer-add-to-cart.is-success {
+	background: #1a8a3b;
+}
+
+@keyframes ao-spin {
+	to { transform: rotate(360deg); }
+}
+
+/* Nav buttons */
+.amazing-offer-wrapper .amazing-offer-nav {
+	position: absolute;
+	top: 50%;
+	bottom: auto;
+	transform: translateY(-50%);
+	margin: 0;
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	box-shadow: var(--ao-shadow);
+	width: 42px;
+	height: 42px;
+	min-width: 42px;
+	padding: 0;
+	border-radius: 50%;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 5;
+	color: var(--ao-dark);
+	transition: background 0.2s, color 0.2s;
+}
+
+.amazing-offer-wrapper .amazing-offer-nav:hover {
+	background: var(--ao-primary-hover);
+	color: #fff;
+}
+
+.amazing-offer-wrapper .amazing-offer-prev {
+	right: 6px;
+	left: auto;
+}
+
+.amazing-offer-wrapper .amazing-offer-next {
+	left: 6px;
+	right: auto;
+}
+
+.amazing-offer-wrapper .amazing-offer-nav .dashicons {
+	font-size: 22px;
+	width: 22px;
+	height: 22px;
+	line-height: 22px;
+}
+
+.amazing-offer-wrapper .amazing-offer-nav[disabled] {
+	opacity: 0.35;
+	cursor: default;
+}
+
+/* Dots */
+.amazing-offer-dots {
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+	margin-top: 18px;
+}
+
+.amazing-offer-dots button {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	border: none;
+	background: #d0d2da;
+	cursor: pointer;
+	padding: 0;
+	transition: background 0.2s, width 0.2s;
+}
+
+.amazing-offer-dots button.is-active {
+	background: var(--ao-primary-hover);
+	width: 26px;
+	border-radius: 6px;
+}
+
+/* Empty */
+.amazing-offer-empty {
+	text-align: center;
+	padding: 30px;
+	color: #888;
+	background: #f8f9fa;
+	border-radius: var(--ao-radius);
+}
+
+/* Responsive helpers (card widths set inline by JS via flex-basis) */
+@media (max-width: 480px) {
+	.amazing-offer-header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.ao-timer-box {
+		min-width: 44px;
+		padding: 6px 8px;
+	}
+}
+
+/* Explicit LTR override safety */
+[dir="rtl"] .amazing-offer-prev .dashicons {
+	transform: none;
+}

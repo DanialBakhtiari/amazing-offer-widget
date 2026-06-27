@@ -1,0 +1,148 @@
+# Copyright (C) 2026 Danial Bakhtiari
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Amazing Offer Widget 1.0.0\n"
+"Report-Msgid-Bugs-To: https://danialbakhtiari.com\n"
+"POT-Creation-Date: 2026-06-27 00:00+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fa_IR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Domain: amazing-offer\n"
+
+msgid "Amazing Offer"
+msgstr ""
+
+msgid "پیشنهاد شگفت‌انگیز"
+msgstr ""
+
+msgid "مدیریت محصولات"
+msgstr ""
+
+msgid "تنظیمات ویجت"
+msgstr ""
+
+msgid "حمایت از سازنده"
+msgstr ""
+
+msgid "افزودن خودکار محصولات تخفیف‌دار"
+msgstr ""
+
+msgid "بارگذاری محصولات تخفیف‌دار"
+msgstr ""
+
+msgid "انتخاب همه"
+msgstr ""
+
+msgid "افزودن موارد انتخاب شده"
+msgstr ""
+
+msgid "افزودن دستی محصول"
+msgstr ""
+
+msgid "محصولات فعال در ویجت"
+msgstr ""
+
+msgid "ذخیره ترتیب"
+msgstr ""
+
+msgid "تصویر"
+msgstr ""
+
+msgid "نام"
+msgstr ""
+
+msgid "قیمت"
+msgstr ""
+
+msgid "تخفیف"
+msgstr ""
+
+msgid "حذف"
+msgstr ""
+
+msgid "تنظیمات عنوان"
+msgstr ""
+
+msgid "عنوان بخش"
+msgstr ""
+
+msgid "زیرعنوان"
+msgstr ""
+
+msgid "تنظیمات تایمر"
+msgstr ""
+
+msgid "نمایش تایمر شمارش معکوس"
+msgstr ""
+
+msgid "نوع تایمر"
+msgstr ""
+
+msgid "هر روز تا نیمه‌شب"
+msgstr ""
+
+msgid "مدت زمان ثابت از اولین بازدید"
+msgstr ""
+
+msgid "تاریخ پایان مشخص"
+msgstr ""
+
+msgid "تنظیمات اسلایدر"
+msgstr ""
+
+msgid "حالت نمایش"
+msgstr ""
+
+msgid "اسلایدر خودکار"
+msgstr ""
+
+msgid "اسلایدر دستی"
+msgstr ""
+
+msgid "گرید ثابت"
+msgstr ""
+
+msgid "تنظیمات کارت محصول"
+msgstr ""
+
+msgid "افزودن به سبد"
+msgstr ""
+
+msgid "ذخیره تنظیمات"
+msgstr ""
+
+msgid "بازنشانی"
+msgstr ""
+
+msgid "به سبد خرید اضافه شد."
+msgstr ""
+
+msgid "ناموجود"
+msgstr ""
+
+msgid "روز"
+msgstr ""
+
+msgid "ساعت"
+msgstr ""
+
+msgid "دقیقه"
+msgstr ""
+
+msgid "ثانیه"
+msgstr ""
+
+msgid "کپی"
+msgstr ""
+
+msgid "کپی شد! ✓"
+msgstr ""
+
+msgid "این پلاگین برای کارکرد به ووکامرس نیاز دارد. لطفاً ابتدا ووکامرس را نصب و فعال کنید."
+msgstr ""

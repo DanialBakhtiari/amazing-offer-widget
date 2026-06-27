@@ -1,0 +1,25 @@
+# Build artifacts
+*.zip
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*~
+
+# Logs
+*.log
+
+# Dependency dirs (plugin is standalone, but guard anyway)
+node_modules/
+vendor/
+
+# Source prompt (internal working doc)
+amazing-offer-plugin-prompt.md

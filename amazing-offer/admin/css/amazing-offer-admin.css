@@ -1,0 +1,614 @@
+/**
+ * Amazing Offer — admin dashboard styles (RTL).
+ */
+
+:root {
+	--ao-admin-primary: #e04a1f;
+	--ao-admin-primary-hover: #c93d16;
+	--ao-admin-dark: #1a1a2e;
+	--ao-admin-bg: #f8f9fa;
+	--ao-admin-radius: 12px;
+	--ao-admin-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.amazing-offer-wrap {
+	direction: rtl;
+	max-width: 1100px;
+	margin: 20px auto 60px;
+}
+
+.amazing-offer-wrap * {
+	box-sizing: border-box;
+}
+
+/* Topbar */
+.amazing-offer-topbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: linear-gradient(135deg, var(--ao-admin-dark), #2a2a4a);
+	color: #fff;
+	padding: 22px 26px;
+	border-radius: var(--ao-admin-radius);
+	box-shadow: var(--ao-admin-shadow);
+}
+
+.amazing-offer-brand {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.amazing-offer-brand .dashicons {
+	font-size: 40px;
+	width: 40px;
+	height: 40px;
+	color: var(--ao-admin-primary);
+}
+
+.amazing-offer-brand h1 {
+	margin: 0;
+	color: #fff;
+	font-size: 22px;
+}
+
+.amazing-offer-brand p {
+	margin: 2px 0 0;
+	color: #c9c9d6;
+	font-size: 13px;
+}
+
+.amazing-offer-version {
+	background: rgba(255, 255, 255, 0.12);
+	padding: 4px 12px;
+	border-radius: 20px;
+	font-size: 12px;
+}
+
+/* Tabs */
+.amazing-offer-tabs {
+	display: flex;
+	gap: 8px;
+	margin: 22px 0;
+	flex-wrap: wrap;
+}
+
+.amazing-offer-tab {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 12px 22px;
+	background: #fff;
+	border-radius: var(--ao-admin-radius);
+	text-decoration: none;
+	color: var(--ao-admin-dark);
+	font-weight: 600;
+	box-shadow: var(--ao-admin-shadow);
+	transition: all 0.2s ease;
+}
+
+.amazing-offer-tab:hover {
+	color: var(--ao-admin-primary);
+}
+
+.amazing-offer-tab.is-active {
+	background: var(--ao-admin-primary);
+	color: #fff;
+}
+
+.amazing-offer-tab.is-active:hover {
+	color: #fff;
+}
+
+/* Card box */
+.amazing-offer-card-box {
+	background: #fff;
+	border-radius: var(--ao-admin-radius);
+	box-shadow: var(--ao-admin-shadow);
+	padding: 22px 24px;
+	margin-bottom: 22px;
+}
+
+.amazing-offer-card-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 18px;
+	padding-bottom: 14px;
+	border-bottom: 1px solid #eef0f3;
+	flex-wrap: wrap;
+}
+
+.amazing-offer-card-head h2 {
+	margin: 0;
+	font-size: 16px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	color: var(--ao-admin-dark);
+}
+
+.amazing-offer-card-head h2 .dashicons {
+	color: var(--ao-admin-primary);
+}
+
+.amazing-offer-card-foot {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 16px;
+	padding-top: 14px;
+	border-top: 1px solid #eef0f3;
+}
+
+/* Buttons with icon */
+.amazing-offer-wrap .button .dashicons {
+	vertical-align: middle;
+	margin-left: 4px;
+	height: 18px;
+}
+
+/* Sale results grid */
+.amazing-offer-sale-results {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+	gap: 12px;
+}
+
+.ao-sale-item {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	border: 1px solid #eef0f3;
+	border-radius: 10px;
+	padding: 10px;
+	cursor: pointer;
+	transition: border-color 0.2s;
+}
+
+.ao-sale-item:hover {
+	border-color: var(--ao-admin-primary);
+}
+
+.ao-sale-item img {
+	width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 8px;
+}
+
+.ao-sale-item .ao-sale-info {
+	flex: 1;
+	min-width: 0;
+}
+
+.ao-sale-item .ao-sale-name {
+	font-weight: 600;
+	font-size: 13px;
+	display: block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.ao-sale-item .ao-sale-price del {
+	color: #999;
+	font-size: 12px;
+	margin-left: 6px;
+}
+
+.ao-sale-item .ao-sale-discount {
+	color: var(--ao-admin-primary);
+	font-weight: 700;
+	font-size: 12px;
+}
+
+.ao-check-all {
+	font-weight: 600;
+}
+
+/* Search */
+.amazing-offer-search-wrap {
+	position: relative;
+}
+
+#ao-search-input {
+	width: 100%;
+	padding: 12px 14px;
+	border-radius: 10px;
+	border: 1px solid #dcdfe4;
+	font-size: 14px;
+}
+
+.amazing-offer-search-results {
+	position: absolute;
+	z-index: 20;
+	left: 0;
+	right: 0;
+	background: #fff;
+	border: 1px solid #e2e5ea;
+	border-radius: 10px;
+	margin-top: 6px;
+	box-shadow: var(--ao-admin-shadow);
+	max-height: 320px;
+	overflow-y: auto;
+	display: none;
+}
+
+.amazing-offer-search-results.is-open {
+	display: block;
+}
+
+.ao-search-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 12px;
+	cursor: pointer;
+	border-bottom: 1px solid #f1f2f5;
+}
+
+.ao-search-item:hover {
+	background: #f8f9fa;
+}
+
+.ao-search-item img {
+	width: 40px;
+	height: 40px;
+	object-fit: cover;
+	border-radius: 6px;
+}
+
+.ao-search-item .ao-search-name {
+	flex: 1;
+	font-size: 13px;
+}
+
+/* Products table */
+.amazing-offer-products-table {
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.amazing-offer-products-table th {
+	font-weight: 700;
+}
+
+.amazing-offer-products-table img {
+	border-radius: 8px;
+	object-fit: cover;
+}
+
+.ao-col-handle {
+	width: 36px;
+	text-align: center;
+}
+
+.ao-drag-handle {
+	cursor: grab;
+	color: #aaa;
+}
+
+.ao-col-image {
+	width: 64px;
+}
+
+.ao-discount-badge {
+	background: var(--ao-admin-primary);
+	color: #fff;
+	padding: 2px 8px;
+	border-radius: 20px;
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.ao-remove-row .dashicons {
+	color: #c0392b;
+}
+
+.ao-sortable-placeholder {
+	height: 60px;
+	background: #fff6f3;
+	border: 1px dashed var(--ao-admin-primary);
+}
+
+.amazing-offer-hint,
+.amazing-offer-shortcode-hint {
+	font-size: 13px;
+	color: #666;
+	margin-top: 12px;
+}
+
+.amazing-offer-shortcode-hint {
+	background: #fff;
+	padding: 14px 18px;
+	border-radius: var(--ao-admin-radius);
+	box-shadow: var(--ao-admin-shadow);
+}
+
+.amazing-offer-shortcode-hint code {
+	background: var(--ao-admin-dark);
+	color: #fff;
+	padding: 3px 10px;
+	border-radius: 6px;
+}
+
+/* Settings form fields */
+.ao-field {
+	margin-bottom: 16px;
+}
+
+.ao-field > label {
+	display: block;
+	font-weight: 600;
+	margin-bottom: 6px;
+	color: var(--ao-admin-dark);
+}
+
+.ao-field input[type="text"],
+.ao-field input[type="number"],
+.ao-field input[type="datetime-local"] {
+	width: 100%;
+	max-width: 420px;
+	padding: 9px 12px;
+	border-radius: 8px;
+	border: 1px solid #dcdfe4;
+}
+
+.ao-field-inline {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	max-width: 480px;
+	border-bottom: 1px dashed #eef0f3;
+	padding-bottom: 12px;
+}
+
+.ao-field-inline > label {
+	margin-bottom: 0;
+}
+
+.ao-field-grid3 {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 14px;
+	max-width: 560px;
+}
+
+.ao-field-grid3 input {
+	width: 100%;
+}
+
+.ao-radio-group {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.ao-radio-group label {
+	font-weight: 500;
+}
+
+.ao-range-wrap {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	max-width: 420px;
+}
+
+.ao-range-wrap input[type="range"] {
+	flex: 1;
+}
+
+.ao-range-wrap output {
+	font-weight: 700;
+	color: var(--ao-admin-primary);
+	min-width: 70px;
+}
+
+/* Toggle switch */
+.ao-switch {
+	position: relative;
+	display: inline-block;
+	width: 48px;
+	height: 26px;
+	flex-shrink: 0;
+}
+
+.ao-switch input[type="checkbox"] {
+	opacity: 0;
+	width: 0;
+	height: 0;
+	position: absolute;
+}
+
+.ao-slider-ui {
+	position: absolute;
+	inset: 0;
+	background: #ccc;
+	border-radius: 26px;
+	transition: 0.3s;
+	cursor: pointer;
+}
+
+.ao-slider-ui::before {
+	content: "";
+	position: absolute;
+	height: 20px;
+	width: 20px;
+	right: 3px;
+	top: 3px;
+	background: #fff;
+	border-radius: 50%;
+	transition: 0.3s;
+}
+
+.ao-switch input:checked + .ao-slider-ui {
+	background: var(--ao-admin-primary);
+}
+
+.ao-switch input:checked + .ao-slider-ui::before {
+	transform: translateX(-22px);
+}
+
+/* Timer dependent fields hidden by JS by default */
+.ao-timer-dep {
+	display: none;
+}
+
+.ao-timer-dep.is-visible {
+	display: block;
+}
+
+.amazing-offer-form-actions {
+	display: flex;
+	gap: 12px;
+	margin-top: 10px;
+}
+
+/* Support tab */
+.amazing-offer-support {
+	display: flex;
+	justify-content: center;
+	padding: 20px 0;
+}
+
+.amazing-offer-support-card {
+	background: #fff;
+	border-radius: 20px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+	padding: 40px 36px;
+	max-width: 520px;
+	width: 100%;
+	text-align: center;
+	border-top: 6px solid var(--ao-admin-primary);
+}
+
+.ao-support-avatar {
+	width: 92px;
+	height: 92px;
+	margin: 0 auto 16px;
+	border-radius: 50%;
+	background: linear-gradient(135deg, var(--ao-admin-primary), #ff8a5c);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.ao-support-avatar .dashicons {
+	font-size: 48px;
+	width: 48px;
+	height: 48px;
+	color: #fff;
+}
+
+.ao-support-name {
+	margin: 0;
+	font-size: 24px;
+	color: var(--ao-admin-dark);
+}
+
+.ao-support-role {
+	margin: 4px 0;
+	color: #777;
+}
+
+.ao-support-site {
+	color: var(--ao-admin-primary);
+	text-decoration: none;
+	font-weight: 600;
+}
+
+.ao-support-quote {
+	margin: 22px 0;
+	font-size: 16px;
+	line-height: 1.9;
+	color: #444;
+	background: var(--ao-admin-bg);
+	padding: 18px;
+	border-radius: 14px;
+	border: none;
+}
+
+.ao-support-pay {
+	background: linear-gradient(135deg, #fff6f3, #fff);
+	border: 1px solid #ffd9cb;
+	border-radius: 16px;
+	padding: 22px;
+	text-align: right;
+}
+
+.ao-pay-head {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-weight: 700;
+	color: var(--ao-admin-dark);
+	margin-bottom: 14px;
+}
+
+.ao-pay-head .dashicons {
+	color: var(--ao-admin-primary);
+}
+
+.ao-pay-bank {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin-bottom: 14px;
+	font-size: 14px;
+}
+
+.ao-pay-card {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	background: #fff;
+	border: 1px solid #eee;
+	border-radius: 12px;
+	padding: 12px 14px;
+}
+
+#ao-card-number {
+	flex: 1;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 19px;
+	letter-spacing: 2px;
+	background: none;
+	color: var(--ao-admin-dark);
+	direction: ltr;
+	text-align: center;
+}
+
+.ao-copy-feedback {
+	display: inline-block;
+	margin-top: 10px;
+	color: #1a8a3b;
+	font-weight: 600;
+	min-height: 20px;
+}
+
+.ao-support-links {
+	display: flex;
+	gap: 12px;
+	justify-content: center;
+	margin-top: 24px;
+}
+
+/* Responsive */
+@media screen and (max-width: 782px) {
+	.ao-field-grid3 {
+		grid-template-columns: 1fr;
+	}
+
+	.amazing-offer-topbar {
+		flex-direction: column;
+		gap: 12px;
+		text-align: center;
+	}
+
+	.amazing-offer-tabs {
+		flex-direction: column;
+	}
+}

@@ -1,0 +1,16 @@
+# Normalize line endings.
+* text=auto eol=lf
+
+# Binary assets.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.zip binary
+*.pot binary
+
+# Exclude dev-only files from `git archive` / release tarballs.
+/.gitignore        export-ignore
+/.gitattributes    export-ignore
+/amazing-offer-plugin-prompt.md export-ignore
+/CHANGELOG.md      export-ignore
