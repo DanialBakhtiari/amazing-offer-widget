@@ -1,0 +1,343 @@
+/**
+ * Special Offer — front-end styles (RTL-first), scoped to .ao-so-*.
+ */
+
+.ao-so-wrapper {
+	--ao-primary: #1a1a2e;
+	--ao-primary-hover: #e04a1f;
+	--ao-badge: #e04a1f;
+	--ao-radius: 12px;
+	--ao-gap: 16px;
+	--ao-card-bg: #ffffff;
+	direction: rtl;
+	font-family: inherit;
+	box-sizing: border-box;
+}
+
+.ao-so-wrapper *,
+.ao-so-wrapper *::before,
+.ao-so-wrapper *::after {
+	box-sizing: border-box;
+}
+
+/* Section background when set */
+.ao-so-wrapper[style*="--ao-section-bg"] {
+	background: var(--ao-section-bg);
+	padding: 22px;
+	border-radius: var(--ao-radius);
+}
+
+/* Header */
+.ao-so-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-bottom: 20px;
+	flex-wrap: wrap;
+}
+
+.ao-so-title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 0;
+	font-size: 1.6em;
+	color: var(--ao-primary);
+}
+
+.ao-so-icon {
+	color: var(--ao-badge);
+	animation: ao-so-flash 1.6s infinite;
+}
+
+@keyframes ao-so-flash {
+	0%, 100% { opacity: 1; transform: scale(1); }
+	50% { opacity: 0.5; transform: scale(1.15); }
+}
+
+.ao-so-subtitle {
+	margin: 4px 0 0;
+	color: #777;
+	font-size: 0.9em;
+}
+
+/* Timer */
+.ao-so-timer {
+	display: flex;
+	gap: 8px;
+}
+
+.ao-so-timer-box {
+	background: var(--ao-primary);
+	color: #fff;
+	border-radius: 10px;
+	padding: 8px 10px;
+	min-width: 52px;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.ao-so-num {
+	font-size: 1.3em;
+	font-weight: 700;
+	line-height: 1;
+	font-variant-numeric: tabular-nums;
+}
+
+.ao-so-lbl {
+	font-size: 0.65em;
+	opacity: 0.85;
+}
+
+/* Body + banner layout */
+.ao-so-body {
+	display: block;
+}
+
+.ao-so-has-banner .ao-so-body {
+	display: flex;
+	gap: var(--ao-gap);
+	align-items: stretch;
+}
+
+.ao-so-banner-left .ao-so-body {
+	flex-direction: row-reverse;
+}
+
+.ao-so-banner {
+	flex: 0 0 28%;
+	min-width: 0;
+}
+
+.ao-so-banner-img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: var(--ao-radius);
+	display: block;
+}
+
+.ao-so-has-banner .ao-so-slider,
+.ao-so-has-banner .ao-so-grid {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+/* Slider shell */
+.ao-so-slider.swiper {
+	position: relative;
+	padding: 4px;
+}
+
+.ao-so-slider .swiper-slide {
+	height: auto;
+	display: flex;
+}
+
+/* Grid mode */
+.ao-so-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	gap: var(--ao-gap);
+}
+
+/* Card */
+.ao-so-card {
+	background: var(--ao-card-bg);
+	border: 1px solid #eef0f3;
+	border-radius: var(--ao-radius);
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.ao-so-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+.ao-so-card-media {
+	position: relative;
+	overflow: hidden;
+}
+
+.ao-so-card-media img {
+	width: 100%;
+	height: auto;
+	display: block;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+}
+
+.ao-so-badge {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: var(--ao-badge);
+	color: #fff;
+	font-weight: 700;
+	font-size: 0.85em;
+	padding: 4px 10px;
+	border-radius: 20px;
+	z-index: 2;
+}
+
+.ao-so-card-body {
+	padding: 14px 16px 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	flex: 1;
+}
+
+/* Title: 2-line clamp + fixed height so cards stay equal */
+.ao-so-card-title {
+	margin: 0;
+	font-size: 1em;
+	line-height: 1.5;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	min-height: 3em;
+}
+
+.ao-so-card-title a {
+	color: var(--ao-primary);
+	text-decoration: none;
+}
+
+.ao-so-card-title a:hover {
+	color: var(--ao-primary-hover);
+}
+
+.ao-so-card-price {
+	display: flex;
+	align-items: baseline;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.ao-so-regular-price {
+	color: #999;
+	font-size: 0.85em;
+}
+
+.ao-so-sale-price {
+	color: var(--ao-primary-hover);
+	font-weight: 700;
+	font-size: 1.05em;
+}
+
+/* Add to cart */
+.ao-so-add-to-cart {
+	margin-top: auto;
+	background: var(--ao-primary);
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	padding: 10px 14px;
+	font-size: 0.92em;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background 0.2s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+
+.ao-so-add-to-cart:hover {
+	background: var(--ao-primary-hover);
+}
+
+.ao-so-add-to-cart.is-disabled,
+.ao-so-add-to-cart[disabled] {
+	background: #c8c8d0;
+	cursor: not-allowed;
+}
+
+.ao-so-btn-spinner {
+	display: none;
+	width: 16px;
+	height: 16px;
+	border: 2px solid rgba(255, 255, 255, 0.4);
+	border-top-color: #fff;
+	border-radius: 50%;
+	animation: ao-so-spin 0.7s linear infinite;
+}
+
+.ao-so-add-to-cart.is-loading .ao-so-btn-spinner {
+	display: inline-block;
+}
+
+.ao-so-add-to-cart.is-loading .ao-so-btn-text {
+	opacity: 0.5;
+}
+
+.ao-so-add-to-cart.is-success {
+	background: #1a8a3b;
+}
+
+@keyframes ao-so-spin {
+	to { transform: rotate(360deg); }
+}
+
+/* Swiper nav + pagination themed via vars */
+.ao-so-slider .swiper-button-prev,
+.ao-so-slider .swiper-button-next {
+	color: var(--ao-primary);
+	background: #fff;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+	border: 1px solid #e5e7eb;
+}
+
+.ao-so-slider .swiper-button-prev::after,
+.ao-so-slider .swiper-button-next::after {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.ao-so-slider .swiper-button-prev:hover,
+.ao-so-slider .swiper-button-next:hover {
+	color: #fff;
+	background: var(--ao-primary-hover);
+}
+
+.ao-so-slider .swiper-pagination-bullet-active {
+	background: var(--ao-primary-hover);
+}
+
+/* Empty */
+.ao-so-empty {
+	text-align: center;
+	padding: 30px;
+	color: #888;
+	background: #f8f9fa;
+	border-radius: var(--ao-radius);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.ao-so-has-banner .ao-so-body {
+		flex-direction: column;
+	}
+
+	.ao-so-banner {
+		flex-basis: auto;
+	}
+
+	.ao-so-header {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}

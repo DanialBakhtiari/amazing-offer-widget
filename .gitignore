@@ -21,5 +21,10 @@ desktop.ini
 node_modules/
 vendor/
 
+# Exception: the bundled front-end Swiper is a shipped runtime asset
+# (local, no CDN), not a build-time dependency — keep it tracked.
+!amazing-offer/modules/special-offer/public/vendor/
+!amazing-offer/modules/special-offer/public/vendor/**
+
 # Source prompt (internal working doc)
 amazing-offer-plugin-prompt.md

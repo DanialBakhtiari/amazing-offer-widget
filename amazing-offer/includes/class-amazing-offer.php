@@ -64,6 +64,63 @@ class Amazing_Offer {
 		if ( amazing_offer_is_elementor_active() ) {
 			add_action( 'elementor/init', array( $this, 'init_elementor' ) );
 		}
+
+		// Additive modules (no-op when none registered).
+		$this->load_modules();
+	}
+
+	/**
+	 * Discover and boot self-contained modules.
+	 *
+	 * Modules live at modules/<name>/<name>.php and self-register onto the
+	 * documented `amazing_offer_modules` filter. The class autoloader does not
+	 * scan modules/, so each module bootstrap is required explicitly here; the
+	 * module is then responsible for requiring its own classes. With no module
+	 * registered the loop is a no-op and behavior is identical to core.
+	 *
+	 * @return void
+	 */
+	private function load_modules() {
+		$bootstraps = glob( AMAZING_OFFER_PLUGIN_DIR . 'modules/*/*.php' );
+		if ( is_array( $bootstraps ) ) {
+			foreach ( $bootstraps as $bootstrap ) {
+				require_once $bootstrap;
+			}
+		}
+
+		/**
+		 * Filter the additive modules to boot.
+		 *
+		 * Each entry is an array with keys: 'label', 'class', 'file', and an
+		 * optional 'enabled' flag. A missing 'enabled' key means enabled, to
+		 * stay compatible with the documented label/class/file contract.
+		 *
+		 * @param array $modules Registered modules keyed by slug.
+		 */
+		$modules = apply_filters( 'amazing_offer_modules', array() );
+		if ( ! is_array( $modules ) ) {
+			return;
+		}
+
+		foreach ( $modules as $module ) {
+			if ( ! is_array( $module ) ) {
+				continue;
+			}
+			if ( array_key_exists( 'enabled', $module ) && ! $module['enabled'] ) {
+				continue;
+			}
+			if ( ! empty( $module['file'] ) && file_exists( $module['file'] ) ) {
+				require_once $module['file'];
+			}
+			if ( empty( $module['class'] ) || ! class_exists( $module['class'] ) ) {
+				continue;
+			}
+			$class    = $module['class'];
+			$instance = new $class( $this->settings, $this->products );
+			if ( method_exists( $instance, 'register_hooks' ) ) {
+				$instance->register_hooks();
+			}
+		}
 	}
 
 	/**
