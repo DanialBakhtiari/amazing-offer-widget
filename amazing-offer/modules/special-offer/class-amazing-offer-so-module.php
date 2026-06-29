@@ -23,6 +23,10 @@ require_once AMAZING_OFFER_SO_DIR . 'includes/class-amazing-offer-so-repository.
 require_once AMAZING_OFFER_SO_DIR . 'includes/class-amazing-offer-so-render.php';
 require_once AMAZING_OFFER_SO_DIR . 'public/class-amazing-offer-so-public.php';
 
+if ( is_admin() ) {
+	require_once AMAZING_OFFER_SO_DIR . 'admin/class-amazing-offer-so-admin.php';
+}
+
 /**
  * Module controller.
  */
@@ -86,6 +90,12 @@ class Amazing_Offer_SO_Module {
 		$this->public->register_hooks();
 
 		add_shortcode( 'special_offer', array( $this, 'render_shortcode' ) );
+
+		// Admin manager + editor.
+		if ( is_admin() && class_exists( 'Amazing_Offer_SO_Admin' ) ) {
+			$admin = new Amazing_Offer_SO_Admin( $this->settings, $this->products, $this->repository );
+			$admin->register_hooks();
+		}
 	}
 
 	/**
