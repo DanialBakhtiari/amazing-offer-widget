@@ -13,7 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'AMAZING_OFFER_SO_VERSION', '1.0.0' );
+// Track the plugin version so module asset URLs bust the browser cache on
+// every release (no more hard-refresh needed after an update).
+define( 'AMAZING_OFFER_SO_VERSION', defined( 'AMAZING_OFFER_VERSION' ) ? AMAZING_OFFER_VERSION : '1.0.0' );
 define( 'AMAZING_OFFER_SO_DIR', plugin_dir_path( __FILE__ ) );
 define( 'AMAZING_OFFER_SO_URL', plugin_dir_url( __FILE__ ) );
 

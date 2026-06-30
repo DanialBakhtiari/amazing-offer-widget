@@ -4,7 +4,7 @@ Tags: woocommerce, offer, sale, slider, elementor, discount, countdown
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.1.3
+Stable tag: 1.1.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -52,6 +52,9 @@ Attributes: limit, title, source (sale|saved|category), category, mode (auto|man
 پلاگین یک پیام هشدار نمایش می‌دهد و بدون خطا غیرفعال می‌ماند.
 
 == Changelog ==
+
+= 1.1.4 =
+* رفع مشکل cache: نسخهٔ asset‌های ماژول «پیشنهاد ویژه» روی 1.0.0 ثابت مانده بود و مرورگر بعد از هر آپدیت فایل قدیمی را سرو می‌کرد (نیاز به hard refresh). اکنون نسخهٔ asset‌ها به نسخهٔ پلاگین گره خورده و هر به‌روزرسانی به‌صورت خودکار cache مرورگر را تازه می‌کند.
 
 = 1.1.3 =
 * رفع باگ: در پیش‌نمایش زندهٔ ویرایشگر «پیشنهاد ویژه»، پس از بارگذاری/انتخاب محصولات، کارت‌ها بی‌وقفه بزرگ می‌شدند (حلقهٔ بازخورد عرض بین فلکس‌باکس و اسلایدر). با افزودن min-width:0 به ستون پیش‌نمایش و مهار عرض ناحیهٔ پیش‌نمایش رفع شد. خروجی فرانت تغییری نکرده است.

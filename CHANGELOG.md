@@ -5,6 +5,15 @@ All notable changes to **Amazing Offer Widget** are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.1.4] - 2026-06-30
+
+### Fixed
+- Module asset cache-busting: `AMAZING_OFFER_SO_VERSION` was hardcoded to
+  `1.0.0`, so the `?ver=` query on the module CSS/JS never changed and browsers
+  kept serving stale files after an update (a hard refresh was needed to see
+  fixes like 1.1.3). The module version now tracks the plugin version, so every
+  release automatically busts the asset cache.
+
 ## [1.1.3] - 2026-06-30
 
 ### Fixed
