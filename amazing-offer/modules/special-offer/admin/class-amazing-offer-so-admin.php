@@ -77,6 +77,7 @@ class Amazing_Offer_SO_Admin {
 		add_action( 'wp_ajax_ao_so_toggle', array( $this, 'ajax_toggle' ) );
 		add_action( 'wp_ajax_ao_so_reorder', array( $this, 'ajax_reorder' ) );
 		add_action( 'wp_ajax_ao_so_save', array( $this, 'ajax_save' ) );
+		add_action( 'wp_ajax_ao_so_preview', array( $this, 'ajax_preview' ) );
 	}
 
 	/**
@@ -108,6 +109,27 @@ class Amazing_Offer_SO_Admin {
 
 		wp_enqueue_media();
 		wp_enqueue_style( 'wp-color-picker' );
+
+		// The live preview reuses the real front-end assets so it matches
+		// production exactly. They are not registered in admin context, so
+		// enqueue them here directly.
+		wp_enqueue_style( 'ao-so-swiper', AMAZING_OFFER_SO_URL . 'public/vendor/swiper/swiper-bundle.min.css', array(), '11.2.10' );
+		wp_enqueue_style( 'ao-so-public', AMAZING_OFFER_SO_URL . 'public/css/ao-so-public.css', array( 'ao-so-swiper', 'dashicons' ), AMAZING_OFFER_SO_VERSION );
+		wp_enqueue_script( 'ao-so-swiper', AMAZING_OFFER_SO_URL . 'public/vendor/swiper/swiper-bundle.min.js', array(), '11.2.10', true );
+		wp_enqueue_script( 'ao-so-public', AMAZING_OFFER_SO_URL . 'public/js/ao-so-public.js', array( 'ao-so-swiper' ), AMAZING_OFFER_SO_VERSION, true );
+		wp_localize_script(
+			'ao-so-public',
+			'amazingOfferSOData',
+			array(
+				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+				'nonce'   => wp_create_nonce( 'amazing_offer_public' ),
+				'i18n'    => array(
+					'prev' => __( 'قبلی', 'amazing-offer' ),
+					'next' => __( 'بعدی', 'amazing-offer' ),
+				),
+			)
+		);
+
 		wp_enqueue_style(
 			'ao-so-admin',
 			AMAZING_OFFER_SO_URL . 'admin/css/ao-so-admin.css',
@@ -117,7 +139,7 @@ class Amazing_Offer_SO_Admin {
 		wp_enqueue_script(
 			'ao-so-admin',
 			AMAZING_OFFER_SO_URL . 'admin/js/ao-so-admin.js',
-			array( 'jquery', 'wp-color-picker', 'jquery-ui-sortable' ),
+			array( 'jquery', 'wp-color-picker', 'jquery-ui-sortable', 'ao-so-public' ),
 			AMAZING_OFFER_SO_VERSION,
 			true
 		);
@@ -294,5 +316,26 @@ class Amazing_Offer_SO_Admin {
 		Amazing_Offer_SO_Schema::save( $id, $raw );
 
 		wp_send_json_success( array( 'message' => __( 'ذخیره شد ✓', 'amazing-offer' ) ) );
+	}
+
+	/**
+	 * AJAX: render a live preview from the (unsaved) editor config.
+	 *
+	 * @return void
+	 */
+	public function ajax_preview() {
+		$this->verify();
+
+		$raw = isset( $_POST['config'] ) ? wp_unslash( $_POST['config'] ) : array(); // phpcs:ignore WordPress.Security.ValidationSanitization.InputNotSanitized -- sanitized in schema.
+		if ( ! is_array( $raw ) ) {
+			$raw = array();
+		}
+
+		// Sanitize + normalize without persisting, then render the same markup
+		// production uses (no published-post guard so drafts preview too).
+		$config = Amazing_Offer_SO_Schema::merge_defaults( Amazing_Offer_SO_Schema::sanitize( $raw ) );
+		$html   = Amazing_Offer_SO_Render::render_config( $config, $this->settings, $this->products );
+
+		wp_send_json_success( array( 'html' => $html ) );
 	}
 }

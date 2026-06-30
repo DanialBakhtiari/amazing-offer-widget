@@ -44,6 +44,9 @@
 			speed: reduceMotion ? 0 : ( parseInt( cfg.speed, 10 ) || 600 ),
 			loop: !! cfg.loop,
 			spaceBetween: gap,
+			// Key breakpoints off the container width so the admin device
+			// preview (constrained width) shows real per-device output.
+			breakpointsBase: 'container',
 			a11y: {
 				enabled: true,
 				prevSlideMessage: I18N.prev || 'Previous',

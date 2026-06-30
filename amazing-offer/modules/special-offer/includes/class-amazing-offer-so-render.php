@@ -33,7 +33,20 @@ class Amazing_Offer_SO_Render {
 		}
 
 		$config = Amazing_Offer_SO_Schema::load( $post_id );
-		$items  = self::get_products( $config, $products );
+		return self::render_config( $config, $settings, $products );
+	}
+
+	/**
+	 * Render from a config array directly (used by the live preview, which
+	 * renders unsaved/draft config without the published-post guard).
+	 *
+	 * @param array                  $config   Normalized config.
+	 * @param Amazing_Offer_Settings $settings Core settings.
+	 * @param Amazing_Offer_Products $products Core products manager.
+	 * @return string
+	 */
+	public static function render_config( array $config, $settings, $products ) {
+		$items = self::get_products( $config, $products );
 
 		// Signal the public controller to enqueue Swiper + module assets.
 		do_action( 'amazing_offer_so_render' );
@@ -44,7 +57,7 @@ class Amazing_Offer_SO_Render {
 
 		$effect    = in_array( $config['effect'], Amazing_Offer_SO_Schema::effects(), true ) ? $config['effect'] : 'slide';
 		$is_grid   = ( 'grid' === $effect );
-		$uid       = 'ao-so-' . $post_id . '-' . wp_rand( 100, 999 );
+		$uid       = 'ao-so-' . wp_rand( 1000, 99999 );
 
 		$swiper_data = array(
 			'effect'       => $effect,

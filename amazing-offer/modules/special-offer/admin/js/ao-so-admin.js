@@ -98,9 +98,12 @@
 		}
 		var templateId = $editor.data( 'id' );
 
-		// Color pickers.
+		// Color pickers (instant cosmetic + debounced re-render on change).
 		if ( $.fn.wpColorPicker ) {
-			$( '.ao-so-color' ).wpColorPicker();
+			$( '.ao-so-color' ).wpColorPicker( {
+				change: function () { setTimeout( function () { applyCosmetic(); renderPreview(); }, 20 ); },
+				clear: function () { setTimeout( function () { applyCosmetic(); renderPreview(); }, 20 ); }
+			} );
 		}
 
 		// Tabs.
@@ -135,7 +138,7 @@
 
 		// Sortable selected products.
 		if ( $.fn.sortable ) {
-			$( '#ao-so-selected' ).sortable( { handle: '.ao-so-drag', axis: 'y' } );
+			$( '#ao-so-selected' ).sortable( { handle: '.ao-so-drag', axis: 'y', update: function () { renderPreview(); } } );
 		}
 
 		// Helpers to build a selected product row.
@@ -156,12 +159,14 @@
 				'</li>'
 			);
 			$( '#ao-so-selected' ).append( $li );
+			renderPreview();
 			return true;
 		}
 
 		$editor.on( 'click', '.ao-so-sel-remove', function () {
 			if ( window.confirm( i18n.confirmRemove ) ) {
 				$( this ).closest( 'li' ).remove();
+				renderPreview();
 			}
 		} );
 
@@ -243,12 +248,82 @@
 			frame.open();
 		} );
 
-		// Device preview toggle (preview itself wired in Phase 4).
+		// Device preview toggle: change container width + re-render so Swiper
+		// recomputes its container-based breakpoints for that device.
 		$( '.ao-so-device' ).on( 'click', function () {
 			$( '.ao-so-device' ).removeClass( 'is-active' );
 			$( this ).addClass( 'is-active' );
 			$( '#ao-so-preview' ).attr( 'data-device', $( this ).data( 'device' ) );
+			renderPreview();
 		} );
+
+		/* ----- Live preview engine (two-tier: instant cosmetic + debounced server render) ----- */
+		var previewTimer = null;
+
+		function fval( name ) {
+			var $f = $( '[name="' + name + '"]' );
+			return $f.length ? $f.val() : '';
+		}
+
+		function applyCosmetic() {
+			var w = $( '#ao-so-preview .ao-so-wrapper' )[ 0 ];
+			if ( ! w ) {
+				return;
+			}
+			var vars = {
+				'--ao-primary': fval( 'config[button_color]' ),
+				'--ao-primary-hover': fval( 'config[button_hover_color]' ),
+				'--ao-badge': fval( 'config[badge_color]' ),
+				'--ao-card-bg': fval( 'config[style][card_bg]' ),
+				'--ao-radius': ( parseInt( fval( 'config[style][radius]' ), 10 ) || 0 ) + 'px',
+				'--ao-gap': ( parseInt( fval( 'config[style][gap]' ), 10 ) || 0 ) + 'px'
+			};
+			Object.keys( vars ).forEach( function ( k ) {
+				if ( vars[ k ] !== '' && vars[ k ] != null ) {
+					w.style.setProperty( k, vars[ k ] );
+				}
+			} );
+			var sect = fval( 'config[style][section_bg]' );
+			if ( sect ) {
+				w.style.setProperty( '--ao-section-bg', sect );
+			}
+			var btn = fval( 'config[cart_button_text]' );
+			if ( btn ) {
+				$( '#ao-so-preview .ao-so-btn-text' ).text( btn );
+			}
+		}
+
+		function doRenderPreview() {
+			var $stage = $( '#ao-so-preview' );
+			var data = $( '#ao-so-form' ).serialize() +
+				'&action=ao_so_preview&nonce=' + encodeURIComponent( cfg.nonce ) +
+				'&id=' + encodeURIComponent( templateId );
+			$.post( cfg.ajaxUrl, data ).done( function ( res ) {
+				if ( res && res.success ) {
+					$stage.html( res.data.html );
+					if ( window.amazingOfferSOBoot ) {
+						window.amazingOfferSOBoot( $stage[ 0 ] );
+					}
+					applyCosmetic();
+				}
+			} );
+		}
+
+		function renderPreview() {
+			clearTimeout( previewTimer );
+			previewTimer = setTimeout( doRenderPreview, 300 );
+		}
+
+		// Instant cosmetic patches (sub-frame, no server round-trip).
+		$editor.on( 'input',
+			'input[name="config[style][radius]"], input[name="config[style][gap]"], input[name="config[cart_button_text]"], input[name="config[style][card_bg]"], input[name="config[style][section_bg]"]',
+			applyCosmetic
+		);
+		// Debounced structural re-render for everything else.
+		$editor.on( 'change', '#ao-so-form input, #ao-so-form select, #ao-so-form textarea', renderPreview );
+
+		// First paint.
+		doRenderPreview();
 
 		// Save.
 		$( '#ao-so-save' ).on( 'click', function () {
