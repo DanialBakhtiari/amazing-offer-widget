@@ -51,6 +51,7 @@ $style    = $config['style'];
 $banner   = $config['banner'];
 $resp_m   = $config['responsive']['mobile'];
 $resp_t   = $config['responsive']['tablet'];
+$resp_d   = isset( $config['responsive']['desktop'] ) ? $config['responsive']['desktop'] : array();
 ?>
 <div class="wrap ao-so-wrap ao-so-editor" dir="rtl" id="ao-so-editor" data-id="<?php echo esc_attr( $post->ID ); ?>">
 
@@ -151,6 +152,8 @@ $resp_t   = $config['responsive']['tablet'];
 			<section class="ao-so-panel" data-panel="style">
 				<div class="ao-so-field"><label><?php esc_html_e( 'عنوان', 'amazing-offer' ); ?></label><input type="text" name="config[title]" value="<?php echo esc_attr( $config['title'] ); ?>"></div>
 				<div class="ao-so-field"><label><?php esc_html_e( 'زیرعنوان', 'amazing-offer' ); ?></label><input type="text" name="config[subtitle]" value="<?php echo esc_attr( $config['subtitle'] ); ?>"></div>
+				<div class="ao-so-field ao-so-field-inline"><label><?php esc_html_e( 'رنگ متن عنوان', 'amazing-offer' ); ?></label><input type="text" class="ao-so-color" name="config[title_color]" value="<?php echo esc_attr( $config['title_color'] ); ?>" data-default-color=""></div>
+				<div class="ao-so-field ao-so-field-inline"><label><?php esc_html_e( 'رنگ متن زیرعنوان', 'amazing-offer' ); ?></label><input type="text" class="ao-so-color" name="config[subtitle_color]" value="<?php echo esc_attr( $config['subtitle_color'] ); ?>" data-default-color=""></div>
 				<div class="ao-so-field ao-so-field-inline"><label><?php esc_html_e( 'آیکون برق کنار عنوان', 'amazing-offer' ); ?></label><?php $ao_toggle( 'config[show_icon]', $config['show_icon'] ); ?></div>
 				<div class="ao-so-field ao-so-field-inline"><label><?php esc_html_e( 'رنگ دکمه', 'amazing-offer' ); ?></label><input type="text" class="ao-so-color" name="config[button_color]" value="<?php echo esc_attr( $config['button_color'] ); ?>"></div>
 				<div class="ao-so-field ao-so-field-inline"><label><?php esc_html_e( 'رنگ هاور دکمه', 'amazing-offer' ); ?></label><input type="text" class="ao-so-color" name="config[button_hover_color]" value="<?php echo esc_attr( $config['button_hover_color'] ); ?>"></div>
@@ -255,6 +258,10 @@ $resp_t   = $config['responsive']['tablet'];
 				<h3><?php esc_html_e( 'تبلت', 'amazing-offer' ); ?></h3>
 				<div class="ao-so-field"><label><?php esc_html_e( 'تعداد کارت', 'amazing-offer' ); ?></label><input type="number" min="1" max="6" name="config[responsive][tablet][cards]" value="<?php echo isset( $resp_t['cards'] ) ? esc_attr( $resp_t['cards'] ) : ''; ?>" placeholder="<?php esc_attr_e( 'ارث‌بری', 'amazing-offer' ); ?>"></div>
 				<div class="ao-so-field ao-so-field-inline"><label><?php esc_html_e( 'مخفی‌کردن تایمر', 'amazing-offer' ); ?></label><?php $ao_toggle( 'config[responsive][tablet][hide_timer]', ! empty( $resp_t['hide_timer'] ) ); ?></div>
+
+				<h3><?php esc_html_e( 'دسکتاپ', 'amazing-offer' ); ?></h3>
+				<div class="ao-so-field"><label><?php esc_html_e( 'تعداد کارت', 'amazing-offer' ); ?></label><input type="number" min="1" max="6" name="config[responsive][desktop][cards]" value="<?php echo isset( $resp_d['cards'] ) ? esc_attr( $resp_d['cards'] ) : ''; ?>" placeholder="<?php esc_attr_e( 'ارث‌بری از تب اسلایدر', 'amazing-offer' ); ?>"></div>
+				<div class="ao-so-field ao-so-field-inline"><label><?php esc_html_e( 'مخفی‌کردن تایمر', 'amazing-offer' ); ?></label><?php $ao_toggle( 'config[responsive][desktop][hide_timer]', ! empty( $resp_d['hide_timer'] ) ); ?></div>
 			</section>
 
 			</form>

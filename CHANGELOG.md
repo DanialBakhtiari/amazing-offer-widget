@@ -5,6 +5,24 @@ All notable changes to **Amazing Offer Widget** are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.1.5] - 2026-06-30
+
+### Fixed
+- Card price block repeated the same price up to three times (WooCommerce's
+  `get_price_html()` already includes the struck regular for sale items, and the
+  renderer also printed the regular separately). Rewrote it to show the struck
+  regular once + the sale price once (or a single price when not on sale), in a
+  fixed-min-height column so the card layout never shifts.
+- Cards (and their image box) now stay equal height under all conditions: the
+  card fills the equalized slide (`height: 100%`) and the media is a fixed 1:1
+  ratio box with `object-fit: cover`.
+
+### Added
+- Configurable title and subtitle text colors.
+- Desktop card-count override in the Responsive tab.
+- Editor live preview now shows each device's REAL cards-per-view (desktop = 3,
+  etc.) instead of being driven by the narrow preview pane's container width.
+
 ## [1.1.4] - 2026-06-30
 
 ### Fixed

@@ -331,6 +331,8 @@
 			if ( btn ) {
 				$( '#ao-so-preview .ao-so-btn-text' ).text( btn );
 			}
+			$( '#ao-so-preview .ao-so-title' ).css( 'color', fval( 'config[title_color]' ) || '' );
+			$( '#ao-so-preview .ao-so-subtitle' ).css( 'color', fval( 'config[subtitle_color]' ) || '' );
 		}
 
 		function doRenderPreview() {

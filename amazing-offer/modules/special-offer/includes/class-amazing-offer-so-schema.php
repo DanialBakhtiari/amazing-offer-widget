@@ -62,6 +62,10 @@ class Amazing_Offer_SO_Schema {
 			'_schema'    => self::SCHEMA_VERSION,
 			'effect'     => 'slide',
 
+			// Header text colors (empty = inherit theme).
+			'title_color'    => '',
+			'subtitle_color' => '',
+
 			// "See all" header button.
 			'show_see_all' => false,
 			'see_all_text' => 'دیدن همه',
@@ -92,8 +96,9 @@ class Amazing_Offer_SO_Schema {
 				'auto_sync'   => false,
 			),
 			'responsive' => array(
-				'mobile' => array(), // sparse overrides.
-				'tablet' => array(),
+				'mobile'  => array(), // sparse overrides.
+				'tablet'  => array(),
+				'desktop' => array(),
 			),
 		);
 
@@ -115,6 +120,10 @@ class Amazing_Offer_SO_Schema {
 		$clean['effect'] = ( isset( $input['effect'] ) && in_array( $input['effect'], self::effects(), true ) )
 			? $input['effect']
 			: 'slide';
+
+		// Header text colors (empty allowed = inherit).
+		$clean['title_color']    = ( isset( $input['title_color'] ) && '' !== $input['title_color'] && sanitize_hex_color( $input['title_color'] ) ) ? sanitize_hex_color( $input['title_color'] ) : '';
+		$clean['subtitle_color'] = ( isset( $input['subtitle_color'] ) && '' !== $input['subtitle_color'] && sanitize_hex_color( $input['subtitle_color'] ) ) ? sanitize_hex_color( $input['subtitle_color'] ) : '';
 
 		// "See all" button.
 		$clean['show_see_all'] = ! empty( $input['show_see_all'] ) && 'false' !== $input['show_see_all'];
@@ -162,8 +171,9 @@ class Amazing_Offer_SO_Schema {
 		// Responsive sparse overrides.
 		$resp                = ( isset( $input['responsive'] ) && is_array( $input['responsive'] ) ) ? $input['responsive'] : array();
 		$clean['responsive'] = array(
-			'mobile' => self::sanitize_breakpoint( isset( $resp['mobile'] ) ? $resp['mobile'] : array() ),
-			'tablet' => self::sanitize_breakpoint( isset( $resp['tablet'] ) ? $resp['tablet'] : array() ),
+			'mobile'  => self::sanitize_breakpoint( isset( $resp['mobile'] ) ? $resp['mobile'] : array() ),
+			'tablet'  => self::sanitize_breakpoint( isset( $resp['tablet'] ) ? $resp['tablet'] : array() ),
+			'desktop' => self::sanitize_breakpoint( isset( $resp['desktop'] ) ? $resp['desktop'] : array() ),
 		);
 
 		$clean['_schema'] = self::SCHEMA_VERSION;
@@ -245,8 +255,9 @@ class Amazing_Offer_SO_Schema {
 		}
 
 		$merged['responsive'] = array(
-			'mobile' => ( isset( $config['responsive']['mobile'] ) && is_array( $config['responsive']['mobile'] ) ) ? $config['responsive']['mobile'] : array(),
-			'tablet' => ( isset( $config['responsive']['tablet'] ) && is_array( $config['responsive']['tablet'] ) ) ? $config['responsive']['tablet'] : array(),
+			'mobile'  => ( isset( $config['responsive']['mobile'] ) && is_array( $config['responsive']['mobile'] ) ) ? $config['responsive']['mobile'] : array(),
+			'tablet'  => ( isset( $config['responsive']['tablet'] ) && is_array( $config['responsive']['tablet'] ) ) ? $config['responsive']['tablet'] : array(),
+			'desktop' => ( isset( $config['responsive']['desktop'] ) && is_array( $config['responsive']['desktop'] ) ) ? $config['responsive']['desktop'] : array(),
 		);
 
 		return $merged;

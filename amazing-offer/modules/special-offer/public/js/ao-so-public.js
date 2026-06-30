@@ -35,9 +35,29 @@
 		var effect = reduceMotion ? 'slide' : ( cfg.effect || 'slide' );
 		var single = ( effect === 'fade' || effect === 'cards' );
 
-		var resp = cfg.responsive || { mobile: {}, tablet: {} };
+		var resp = cfg.responsive || {};
 		var mob = resp.mobile || {};
 		var tab = resp.tablet || {};
+		var desk = resp.desktop || {};
+
+		// Effective cards-per-view for a device = its responsive override or the
+		// base slider value.
+		function perView( device ) {
+			var o = device === 'mobile' ? mob : ( device === 'tablet' ? tab : desk );
+			var base = device === 'mobile'
+				? ( cards.mobile || 1 )
+				: ( device === 'tablet' ? ( cards.tablet || 2 ) : ( cards.desktop || 3 ) );
+			return ( o && o.cards ) ? o.cards : base;
+		}
+		function gapFor( device ) {
+			var o = device === 'mobile' ? mob : ( device === 'tablet' ? tab : desk );
+			return ( o && o.gap != null ) ? o.gap : gap;
+		}
+
+		// In the admin live preview, force the SELECTED device's real card count
+		// (so "desktop" shows 3 even though the preview pane is physically narrow).
+		var stage = el.closest ? el.closest( '.ao-so-preview-stage' ) : null;
+		var forcedDevice = stage ? stage.getAttribute( 'data-device' ) : null;
 
 		var options = {
 			effect: effect,
@@ -57,20 +77,16 @@
 
 		if ( single ) {
 			options.slidesPerView = 1;
+		} else if ( forcedDevice ) {
+			// Preview: lock to the chosen device's card count + gap.
+			options.slidesPerView = perView( forcedDevice );
+			options.spaceBetween = gapFor( forcedDevice );
+			options.breakpointsBase = 'window';
 		} else {
 			options.breakpoints = {
-				0: {
-					slidesPerView: mob.cards || cards.mobile || 1,
-					spaceBetween: ( mob.gap != null ) ? mob.gap : gap
-				},
-				600: {
-					slidesPerView: tab.cards || cards.tablet || 2,
-					spaceBetween: ( tab.gap != null ) ? tab.gap : gap
-				},
-				1024: {
-					slidesPerView: cards.desktop || 3,
-					spaceBetween: gap
-				}
+				0: { slidesPerView: perView( 'mobile' ), spaceBetween: gapFor( 'mobile' ) },
+				600: { slidesPerView: perView( 'tablet' ), spaceBetween: gapFor( 'tablet' ) },
+				1024: { slidesPerView: perView( 'desktop' ), spaceBetween: gapFor( 'desktop' ) }
 			};
 		}
 

@@ -108,14 +108,14 @@ class Amazing_Offer_SO_Render {
 
 			<div class="ao-so-header">
 				<div class="ao-so-titles">
-					<h2 class="ao-so-title">
+					<h2 class="ao-so-title"<?php echo $config['title_color'] ? ' style="color:' . esc_attr( $config['title_color'] ) . '"' : ''; ?>>
 						<?php if ( ! empty( $config['show_icon'] ) ) : ?>
 							<span class="ao-so-icon dashicons dashicons-superhero-alt" aria-hidden="true"></span>
 						<?php endif; ?>
 						<?php echo esc_html( $config['title'] ); ?>
 					</h2>
 					<?php if ( ! empty( $config['subtitle'] ) ) : ?>
-						<p class="ao-so-subtitle"><?php echo esc_html( $config['subtitle'] ); ?></p>
+						<p class="ao-so-subtitle"<?php echo $config['subtitle_color'] ? ' style="color:' . esc_attr( $config['subtitle_color'] ) . '"' : ''; ?>><?php echo esc_html( $config['subtitle'] ); ?></p>
 					<?php endif; ?>
 					<?php if ( ! empty( $config['show_see_all'] ) && '' !== $config['see_all_text'] ) : ?>
 						<a class="ao-so-see-all" href="<?php echo esc_url( $config['see_all_url'] ? $config['see_all_url'] : '#' ); ?>">
@@ -218,11 +218,19 @@ class Amazing_Offer_SO_Render {
 				<?php if ( ! empty( $config['show_description'] ) && ! empty( $item['short_description'] ) ) : ?>
 					<div class="ao-so-card-desc" style="-webkit-line-clamp:<?php echo (int) $config['desc_lines']; ?>;min-height:<?php echo esc_attr( 1.4 * (int) $config['desc_lines'] ); ?>em;"><?php echo esc_html( wp_strip_all_tags( $item['short_description'] ) ); ?></div>
 				<?php endif; ?>
+				<?php
+				$ao_on_sale = ( $item['regular_price'] > 0 && $item['sale_price'] > 0 && $item['sale_price'] < $item['regular_price'] );
+				$ao_price_fn = function_exists( 'wc_price' ) ? 'wc_price' : null;
+				?>
 				<div class="ao-so-card-price">
-					<?php if ( ! empty( $config['show_original_price'] ) && $item['regular_price'] > $item['sale_price'] && $item['sale_price'] > 0 ) : ?>
-						<del class="ao-so-regular-price"><?php echo wp_kses_post( $item['regular_price_html'] ); ?></del>
+					<?php if ( $ao_on_sale ) : ?>
+						<?php if ( ! empty( $config['show_original_price'] ) ) : ?>
+							<del class="ao-so-regular-price"><?php echo wp_kses_post( $ao_price_fn ? wc_price( $item['regular_price'] ) : $item['regular_price'] ); ?></del>
+						<?php endif; ?>
+						<span class="ao-so-sale-price"><?php echo wp_kses_post( $ao_price_fn ? wc_price( $item['sale_price'] ) : $item['sale_price'] ); ?></span>
+					<?php else : ?>
+						<span class="ao-so-sale-price"><?php echo wp_kses_post( $ao_price_fn ? wc_price( $item['price'] ) : $item['price'] ); ?></span>
 					<?php endif; ?>
-					<span class="ao-so-sale-price"><?php echo wp_kses_post( $item['price_html'] ); ?></span>
 				</div>
 				<?php if ( ! empty( $config['show_add_to_cart'] ) ) : ?>
 					<?php if ( $item['is_purchasable'] ) : ?>
