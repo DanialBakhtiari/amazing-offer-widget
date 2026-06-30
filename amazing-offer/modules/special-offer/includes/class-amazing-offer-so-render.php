@@ -191,7 +191,8 @@ class Amazing_Offer_SO_Render {
 		if ( $banner['link'] ) {
 			$img = '<a href="' . esc_url( $banner['link'] ) . '" class="ao-so-banner-link">' . $img . '</a>';
 		}
-		return '<div class="ao-so-banner">' . $img . '</div>';
+		$fit_class = ( isset( $banner['fit'] ) && 'contain' === $banner['fit'] ) ? ' ao-so-banner-fit-contain' : '';
+		return '<div class="ao-so-banner' . esc_attr( $fit_class ) . '">' . $img . '</div>';
 	}
 
 	/**

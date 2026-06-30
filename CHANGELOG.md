@@ -5,6 +5,25 @@ All notable changes to **Amazing Offer Widget** are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.1.6] - 2026-06-30
+
+### Fixed
+- Desktop card-count changes had no effect on wide screens while tablet changes
+  did. The front-end Swiper used `breakpointsBase: 'container'` (added for the
+  preview), so on a laptop the slider container stayed below 1024px (banner +
+  padding) and never hit the desktop breakpoint. Removed it; the front-end now
+  uses window-based breakpoints (desktop viewport → desktop cards). The admin
+  preview keeps working via its explicit forced-device slidesPerView path.
+- Theme/Elementor `img { height: auto }` (specificity 0,1,1) overrode the card
+  and banner image heights and broke the layout. The image rules are now scoped
+  under `.ao-so-wrapper` (0,2,1) so they win.
+
+### Added
+- Banner fit mode (cover = fill & crop, contain = show whole image) so the
+  banner never deforms.
+- A live "recommended banner image size" hint in the editor, computed from the
+  actual rendered card area, so authors pick an image that fits the layout.
+
 ## [1.1.5] - 2026-06-30
 
 ### Fixed

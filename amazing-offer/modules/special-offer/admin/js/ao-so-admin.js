@@ -335,6 +335,50 @@
 			$( '#ao-so-preview .ao-so-subtitle' ).css( 'color', fval( 'config[subtitle_color]' ) || '' );
 		}
 
+		// Recommend a banner image size from the ACTUAL rendered layout so the
+		// chosen image matches the card area and is not deformed.
+		function ratioStr( w, h ) {
+			function gcd( a, b ) { return b ? gcd( b, a % b ) : a; }
+			var g = gcd( w, h ) || 1;
+			var rw = Math.round( w / g ), rh = Math.round( h / g );
+			if ( rw > 21 || rh > 21 ) {
+				return ( Math.round( ( w / h ) * 100 ) / 100 ) + ' : 1';
+			}
+			return rw + ' : ' + rh;
+		}
+
+		function updateBannerRec() {
+			var $rec = $( '#ao-so-banner-rec' );
+			if ( ! $rec.length ) {
+				return;
+			}
+			var pos = $( 'input[name="config[banner][position]"]:checked' ).val() || 'hidden';
+			if ( 'hidden' === pos ) {
+				$rec.text( i18n.bannerHidden || '' );
+				return;
+			}
+			var w, h;
+			var bannerEl = $( '#ao-so-preview .ao-so-banner' )[ 0 ];
+			if ( bannerEl ) {
+				var r = bannerEl.getBoundingClientRect();
+				w = Math.round( r.width );
+				h = Math.round( r.height );
+			} else {
+				var area = $( '#ao-so-preview .ao-so-body' )[ 0 ] || $( '#ao-so-preview .ao-so-slider' )[ 0 ] || $( '#ao-so-preview .ao-so-wrapper' )[ 0 ];
+				if ( ! area ) { $rec.text( '' ); return; }
+				var ar = area.getBoundingClientRect();
+				if ( 'top' === pos ) { w = Math.round( ar.width ); h = Math.round( ar.width * 0.22 ); }
+				else { w = Math.round( ar.width * 0.28 ); h = Math.round( ar.height ); }
+			}
+			if ( w <= 0 || h <= 0 ) { $rec.text( '' ); return; }
+			// Suggest 2x for retina/quality.
+			var rw = w * 2, rh = h * 2;
+			$rec.html(
+				( i18n.bannerRec || '' ) + ' <b>' + rw + ' × ' + rh + '</b> ' + ( i18n.bannerPx || '' ) +
+				' &nbsp;(' + ( i18n.bannerRatio || '' ) + ' ' + ratioStr( w, h ) + ')'
+			);
+		}
+
 		function doRenderPreview() {
 			var $stage = $( '#ao-so-preview' );
 			var data = $( '#ao-so-form' ).serialize() +
@@ -347,6 +391,7 @@
 						window.amazingOfferSOBoot( $stage[ 0 ] );
 					}
 					applyCosmetic();
+					setTimeout( updateBannerRec, 60 );
 				}
 			} );
 		}

@@ -165,6 +165,10 @@ class Amazing_Offer_SO_Admin {
 					'alreadyAdded'  => __( 'این محصول قبلاً اضافه شده است.', 'amazing-offer' ),
 					'selectMedia'   => __( 'انتخاب تصویر بنر', 'amazing-offer' ),
 					'useImage'      => __( 'استفاده از این تصویر', 'amazing-offer' ),
+					'bannerHidden'  => __( 'برای محاسبهٔ ابعاد پیشنهادی، موقعیت بنر را روی راست/چپ/بالا بگذارید.', 'amazing-offer' ),
+					'bannerRec'     => __( 'ابعاد پیشنهادی تصویر بنر (برای این چیدمان):', 'amazing-offer' ),
+					'bannerPx'      => __( 'پیکسل', 'amazing-offer' ),
+					'bannerRatio'   => __( 'نسبت', 'amazing-offer' ),
 				),
 			)
 		);

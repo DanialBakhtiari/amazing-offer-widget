@@ -138,12 +138,19 @@
 	min-width: 0;
 }
 
-.ao-so-banner-img {
+.ao-so-wrapper .ao-so-banner-img {
 	width: 100%;
 	height: 100%;
+	max-width: 100%;
 	object-fit: cover;
 	border-radius: var(--ao-radius);
 	display: block;
+	margin: 0;
+}
+
+/* "Contain" fit: show the whole image (letterboxed) instead of cropping. */
+.ao-so-wrapper .ao-so-banner-fit-contain .ao-so-banner-img {
+	object-fit: contain;
 }
 
 .ao-so-has-banner .ao-so-slider,
@@ -203,13 +210,16 @@
 	background: #f3f4f7;
 }
 
-.ao-so-card-media img {
+/* Wrapper-scoped so theme/Elementor `img { height:auto }` can't override it. */
+.ao-so-wrapper .ao-so-card-media img {
 	position: absolute;
 	inset: 0;
 	width: 100%;
 	height: 100%;
+	max-width: 100%;
 	object-fit: cover;
 	display: block;
+	margin: 0;
 }
 
 .ao-so-badge {

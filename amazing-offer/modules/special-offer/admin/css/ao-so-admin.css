@@ -128,6 +128,18 @@
 .ao-so-media { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .ao-so-media input { flex: 1; min-width: 220px; }
 
+/* Banner recommended-size hint */
+.ao-so-banner-rec {
+	margin: 4px 0 16px;
+	padding: 10px 14px;
+	background: #fff6f3;
+	border: 1px solid #ffd9cb;
+	border-radius: 8px;
+	font-size: 13px;
+	color: #8a4b39;
+}
+.ao-so-banner-rec b { color: var(--ao-c-primary); font-size: 14px; }
+
 /* Preview */
 .ao-so-preview-toolbar { display: flex; gap: 6px; justify-content: center; margin-bottom: 12px; }
 .ao-so-device { border: 1px solid #dcdfe4; background: #fff; border-radius: 8px; width: 38px; height: 34px; cursor: pointer; }

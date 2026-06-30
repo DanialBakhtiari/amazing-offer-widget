@@ -237,6 +237,14 @@ $resp_d   = isset( $config['responsive']['desktop'] ) ? $config['responsive']['d
 					</div>
 				</div>
 				<div class="ao-so-field">
+					<label><?php esc_html_e( 'حالت برازش تصویر', 'amazing-offer' ); ?></label>
+					<div class="ao-so-radio-group ao-so-radio-inline">
+						<label><input type="radio" name="config[banner][fit]" value="cover" <?php checked( $banner['fit'], 'cover' ); ?>> <?php esc_html_e( 'پرکردن کامل (برش لبه‌ها)', 'amazing-offer' ); ?></label>
+						<label><input type="radio" name="config[banner][fit]" value="contain" <?php checked( $banner['fit'], 'contain' ); ?>> <?php esc_html_e( 'نمایش کامل (بدون برش)', 'amazing-offer' ); ?></label>
+					</div>
+				</div>
+				<div class="ao-so-banner-rec" id="ao-so-banner-rec"><?php esc_html_e( 'برای محاسبهٔ ابعاد پیشنهادی، موقعیت بنر را تنظیم کنید.', 'amazing-offer' ); ?></div>
+				<div class="ao-so-field">
 					<label><?php esc_html_e( 'تصویر بنر', 'amazing-offer' ); ?></label>
 					<div class="ao-so-media">
 						<input type="hidden" name="config[banner][image_id]" id="ao-so-banner-id" value="<?php echo esc_attr( $banner['image_id'] ); ?>">

@@ -87,6 +87,7 @@ class Amazing_Offer_SO_Schema {
 				'link'     => '',
 				'position' => 'hidden', // right | left | top | hidden.
 				'alt'      => '',
+				'fit'      => 'cover', // cover | contain.
 			),
 			'source'     => array(
 				'type'        => 'saved', // saved | sale | category | manual.
@@ -153,6 +154,7 @@ class Amazing_Offer_SO_Schema {
 			'link'     => isset( $banner['link'] ) ? esc_url_raw( $banner['link'] ) : '',
 			'position' => ( isset( $banner['position'] ) && in_array( $banner['position'], $positions, true ) ) ? $banner['position'] : 'hidden',
 			'alt'      => isset( $banner['alt'] ) ? sanitize_text_field( $banner['alt'] ) : '',
+			'fit'      => ( isset( $banner['fit'] ) && in_array( $banner['fit'], array( 'cover', 'contain' ), true ) ) ? $banner['fit'] : 'cover',
 		);
 
 		// Source block.
