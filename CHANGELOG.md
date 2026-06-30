@@ -5,6 +5,16 @@ All notable changes to **Amazing Offer Widget** are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.1.3] - 2026-06-30
+
+### Fixed
+- Special Offer editor: live-preview cards grew without bound after loading or
+  selecting products. The preview column was a flexbox item with the default
+  `min-width: auto`, so it expanded to fit the slider content, which gave Swiper
+  more width, which enlarged the slides — an unbounded width feedback loop. Added
+  `min-width: 0` to the preview column and constrained the preview stage
+  (`width/max-width: 100%`, `overflow: hidden`). Front-end output is unchanged.
+
 ## [1.1.2] - 2026-06-30
 
 ### Fixed

@@ -7,7 +7,7 @@
 </div>
 
 <p align="center">
-  <img alt="Version"      src="https://img.shields.io/badge/version-1.1.2-e04a1f.svg">
+  <img alt="Version"      src="https://img.shields.io/badge/version-1.1.3-e04a1f.svg">
   <img alt="WordPress"    src="https://img.shields.io/badge/WordPress-6.0%2B-21759b.svg">
   <img alt="WooCommerce"  src="https://img.shields.io/badge/WooCommerce-7.0%2B-96588a.svg">
   <img alt="Elementor"    src="https://img.shields.io/badge/Elementor-3.0%2B-92003b.svg">
