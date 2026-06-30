@@ -78,6 +78,8 @@ class Amazing_Offer_SO_Admin {
 		add_action( 'wp_ajax_ao_so_reorder', array( $this, 'ajax_reorder' ) );
 		add_action( 'wp_ajax_ao_so_save', array( $this, 'ajax_save' ) );
 		add_action( 'wp_ajax_ao_so_preview', array( $this, 'ajax_preview' ) );
+		add_action( 'wp_ajax_ao_so_import', array( $this, 'ajax_import' ) );
+		add_action( 'admin_post_ao_so_export', array( $this, 'handle_export' ) );
 	}
 
 	/**
@@ -337,5 +339,63 @@ class Amazing_Offer_SO_Admin {
 		$html   = Amazing_Offer_SO_Render::render_config( $config, $this->settings, $this->products );
 
 		wp_send_json_success( array( 'html' => $html ) );
+	}
+
+	/**
+	 * admin-post: download a template as a JSON file.
+	 *
+	 * @return void
+	 */
+	public function handle_export() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_die( esc_html__( 'دسترسی کافی ندارید.', 'amazing-offer' ) );
+		}
+		$id = isset( $_GET['id'] ) ? absint( $_GET['id'] ) : 0;
+		check_admin_referer( 'ao_so_export_' . $id );
+
+		if ( ! $this->repository->get( $id ) ) {
+			wp_die( esc_html__( 'طرح یافت نشد.', 'amazing-offer' ) );
+		}
+
+		$json = Amazing_Offer_SO_Export::to_json( $id );
+
+		nocache_headers();
+		header( 'Content-Type: application/json; charset=utf-8' );
+		header( 'Content-Disposition: attachment; filename="special-offer-' . $id . '.json"' );
+		header( 'Content-Length: ' . strlen( $json ) );
+		echo $json; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- raw JSON file body.
+		exit;
+	}
+
+	/**
+	 * AJAX: import a template from an uploaded JSON file.
+	 *
+	 * @return void
+	 */
+	public function ajax_import() {
+		$this->verify();
+
+		if ( empty( $_FILES['file'] ) || ! isset( $_FILES['file']['tmp_name'] ) || ! is_uploaded_file( $_FILES['file']['tmp_name'] ) ) {
+			wp_send_json_error( array( 'message' => __( 'فایلی ارسال نشد.', 'amazing-offer' ) ) );
+		}
+
+		$size = isset( $_FILES['file']['size'] ) ? (int) $_FILES['file']['size'] : 0;
+		if ( $size <= 0 || $size > 524288 ) { // 512 KB cap.
+			wp_send_json_error( array( 'message' => __( 'حجم فایل نامعتبر است (حداکثر ۵۱۲ کیلوبایت).', 'amazing-offer' ) ) );
+		}
+
+		$content = file_get_contents( $_FILES['file']['tmp_name'] ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- reading a local upload temp file.
+		$data    = json_decode( $content, true );
+
+		if ( ! is_array( $data ) ) {
+			wp_send_json_error( array( 'message' => __( 'فایل JSON معتبر نیست.', 'amazing-offer' ) ) );
+		}
+
+		$id = Amazing_Offer_SO_Export::import( $data, $this->repository );
+		if ( is_wp_error( $id ) ) {
+			wp_send_json_error( array( 'message' => $id->get_error_message() ) );
+		}
+
+		wp_send_json_success( array( 'id' => $id ) );
 	}
 }

@@ -74,6 +74,37 @@
 			} );
 		} );
 
+		// Import from JSON file.
+		$( '#ao-so-import-btn' ).on( 'click', function () {
+			$( '#ao-so-import-file' ).trigger( 'click' );
+		} );
+		$( '#ao-so-import-file' ).on( 'change', function () {
+			var file = this.files && this.files[ 0 ];
+			if ( ! file ) {
+				return;
+			}
+			var fd = new FormData();
+			fd.append( 'action', 'ao_so_import' );
+			fd.append( 'nonce', cfg.nonce );
+			fd.append( 'file', file );
+			$.ajax( {
+				url: cfg.ajaxUrl,
+				method: 'POST',
+				data: fd,
+				processData: false,
+				contentType: false
+			} ).done( function ( res ) {
+				if ( res.success ) {
+					window.location.href = cfg.editUrl + res.data.id;
+				} else {
+					window.alert( ( res.data && res.data.message ) || i18n.error );
+				}
+			} ).fail( function () {
+				window.alert( i18n.error );
+			} );
+			this.value = '';
+		} );
+
 		// Drag-drop reorder (auto-save).
 		if ( $.fn.sortable ) {
 			$( '#ao-so-rows' ).sortable( {

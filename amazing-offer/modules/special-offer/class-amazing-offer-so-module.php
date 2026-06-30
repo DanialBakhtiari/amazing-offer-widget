@@ -23,6 +23,8 @@ require_once AMAZING_OFFER_SO_DIR . 'includes/class-amazing-offer-so-repository.
 require_once AMAZING_OFFER_SO_DIR . 'includes/class-amazing-offer-so-render.php';
 require_once AMAZING_OFFER_SO_DIR . 'public/class-amazing-offer-so-public.php';
 
+require_once AMAZING_OFFER_SO_DIR . 'includes/class-amazing-offer-so-export.php';
+
 if ( is_admin() ) {
 	require_once AMAZING_OFFER_SO_DIR . 'admin/class-amazing-offer-so-admin.php';
 }

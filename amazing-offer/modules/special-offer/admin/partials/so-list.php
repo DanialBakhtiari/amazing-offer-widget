@@ -22,10 +22,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<p><?php esc_html_e( 'طرح‌های نامحدود اسلایدر محصولات با تایمر و افکت', 'amazing-offer' ); ?></p>
 			</div>
 		</div>
-		<button type="button" class="button button-primary button-hero" id="ao-so-new">
-			<span class="dashicons dashicons-plus-alt2"></span>
-			<?php esc_html_e( 'ساخت طرح جدید', 'amazing-offer' ); ?>
-		</button>
+		<div class="ao-so-topbar-actions">
+			<button type="button" class="button" id="ao-so-import-btn">
+				<span class="dashicons dashicons-upload"></span>
+				<?php esc_html_e( 'ورود از فایل', 'amazing-offer' ); ?>
+			</button>
+			<input type="file" id="ao-so-import-file" accept="application/json,.json" style="display:none">
+			<button type="button" class="button button-primary button-hero" id="ao-so-new">
+				<span class="dashicons dashicons-plus-alt2"></span>
+				<?php esc_html_e( 'ساخت طرح جدید', 'amazing-offer' ); ?>
+			</button>
+		</div>
 	</div>
 
 	<div class="ao-so-card-box">
@@ -68,6 +75,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<td class="ao-so-col-actions">
 								<a class="button button-small" href="<?php echo esc_url( admin_url( 'admin.php?page=' . Amazing_Offer_SO_Admin::PAGE_SLUG . '&action=edit&id=' . $tpl->ID ) ); ?>"><?php esc_html_e( 'ویرایش', 'amazing-offer' ); ?></a>
 								<button type="button" class="button button-small ao-so-duplicate"><?php esc_html_e( 'تکثیر', 'amazing-offer' ); ?></button>
+								<a class="button button-small" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=ao_so_export&id=' . $tpl->ID ), 'ao_so_export_' . $tpl->ID ) ); ?>"><?php esc_html_e( 'خروجی', 'amazing-offer' ); ?></a>
 								<button type="button" class="button button-small ao-so-delete"><span class="dashicons dashicons-trash"></span></button>
 							</td>
 						</tr>

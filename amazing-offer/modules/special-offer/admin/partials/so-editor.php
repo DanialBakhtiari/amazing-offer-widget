@@ -64,6 +64,7 @@ $resp_t   = $config['responsive']['tablet'];
 		</div>
 		<div class="ao-so-topbar-actions">
 			<span class="ao-so-save-feedback" aria-live="polite"></span>
+			<a class="button" href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=ao_so_export&id=' . $post->ID ), 'ao_so_export_' . $post->ID ) ); ?>"><span class="dashicons dashicons-download"></span> <?php esc_html_e( 'خروجی', 'amazing-offer' ); ?></a>
 			<button type="button" class="button button-primary button-hero" id="ao-so-save"><span class="dashicons dashicons-saved"></span> <?php esc_html_e( 'ذخیره', 'amazing-offer' ); ?></button>
 		</div>
 	</div>
