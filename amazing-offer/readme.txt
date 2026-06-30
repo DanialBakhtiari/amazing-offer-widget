@@ -4,7 +4,7 @@ Tags: woocommerce, offer, sale, slider, elementor, discount, countdown
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -52,6 +52,9 @@ Attributes: limit, title, source (sale|saved|category), category, mode (auto|man
 پلاگین یک پیام هشدار نمایش می‌دهد و بدون خطا غیرفعال می‌ماند.
 
 == Changelog ==
+
+= 1.1.2 =
+* رفع باگ بحرانی: لودر ماژول‌ها همهٔ فایل‌های php را با ترتیب اشتباه بارگذاری می‌کرد و باعث خطای کشنده (صفحهٔ سفید/WSOD) در کل سایت می‌شد. اکنون فقط فایل ورودی هر ماژول بارگذاری می‌شود.
 
 = 1.1.1 =
 * «پیشنهاد ویژه»: افزودن دکمهٔ «دیدن همه» (متن/لینک قابل تنظیم) و line-clamp قابل تنظیم برای عنوان (۱ تا ۳ خط) و توضیحات کوتاه محصول (۱ تا ۴ خط) برای هم‌ارتفاع‌ماندن کارت‌ها.

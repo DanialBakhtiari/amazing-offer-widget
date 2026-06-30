@@ -5,6 +5,16 @@ All notable changes to **Amazing Offer Widget** are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.1.2] - 2026-06-30
+
+### Fixed
+- **Critical (white-screen / WSOD):** the module loader globbed every
+  `modules/*/*.php` and required them alphabetically, so a module's class file
+  loaded before its bootstrap defined the constants it depends on
+  (`AMAZING_OFFER_SO_DIR`), fataling on every request. The loader now requires
+  only each module's entry point (`modules/<name>/<name>.php`). Added a
+  full load+init smoke test to prevent recurrence.
+
 ## [1.1.1] - 2026-06-30
 
 ### Added

@@ -81,10 +81,16 @@ class Amazing_Offer {
 	 * @return void
 	 */
 	private function load_modules() {
-		$bootstraps = glob( AMAZING_OFFER_PLUGIN_DIR . 'modules/*/*.php' );
-		if ( is_array( $bootstraps ) ) {
-			foreach ( $bootstraps as $bootstrap ) {
-				require_once $bootstrap;
+		// Load ONLY each module's entry point: modules/<name>/<name>.php.
+		// (Globbing every *.php would require sibling class files before their
+		// bootstrap defines their constants — order-dependent fatal.)
+		$module_dirs = glob( AMAZING_OFFER_PLUGIN_DIR . 'modules/*', GLOB_ONLYDIR );
+		if ( is_array( $module_dirs ) ) {
+			foreach ( $module_dirs as $dir ) {
+				$bootstrap = $dir . '/' . basename( $dir ) . '.php';
+				if ( file_exists( $bootstrap ) ) {
+					require_once $bootstrap;
+				}
 			}
 		}
 
