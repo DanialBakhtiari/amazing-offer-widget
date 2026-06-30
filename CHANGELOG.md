@@ -5,6 +5,34 @@ All notable changes to **Amazing Offer Widget** are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.1.0] - 2026-06-30
+
+### Added
+- **Special Offer module (`پیشنهاد ویژه`)** — an additive, independently
+  toggleable module (master switch `amazing_offer_so_enabled`, default on) for
+  unlimited independent slider "templates" (طرح):
+  - UI-less `ao_special_offer` CPT; full per-template config in one versioned
+    `_ao_so_config` meta layered over core defaults; lazy per-row migration.
+  - Admin manager: create / duplicate / delete / activate-toggle / drag-drop
+    order, and a tabbed editor (products, style, slider, timer, card, banner,
+    responsive) with a two-tier **live preview** (instant CSS-variable cosmetic
+    updates + debounced server re-render) and 3 device modes.
+  - Product sources: manual pick (live search + load on-sale), all on-sale,
+    category, with per-template ordering.
+  - **Swiper 11** (vendored locally, no CDN) effects: slide, fade, coverflow,
+    cards, plus a static grid; RTL, a11y, and `prefers-reduced-motion` aware.
+  - Per-template JSON **export / import** (import lands as a draft).
+  - Three output surfaces sharing one renderer: `[special_offer id="N"]`
+    shortcode, a server-rendered Gutenberg block, and an Elementor widget.
+  - Optional JSON-LD `ItemList` for SEO.
+- Project skills under `.claude/skills/`: `plugin-security-audit`,
+  `special-offer-extend`, `i18n-rtl-check`, `release-manager`.
+
+### Changed
+- Core now consumes the documented `amazing_offer_modules` filter (inert when no
+  module registers). Uninstall additionally removes Special Offer templates,
+  their meta, and `amazing_offer_so_*` options (legacy data untouched).
+
 ## [1.0.1] - 2026-06-27
 
 ### Fixed

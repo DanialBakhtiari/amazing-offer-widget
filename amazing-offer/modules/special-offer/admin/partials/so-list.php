@@ -85,4 +85,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</table>
 		<p class="ao-so-hint"><?php esc_html_e( 'برای تغییر ترتیب، ردیف‌ها را بکشید و رها کنید (ذخیره خودکار).', 'amazing-offer' ); ?></p>
 	</div>
+
+	<?php
+	$ao_so_version = defined( 'AMAZING_OFFER_VERSION' ) ? AMAZING_OFFER_VERSION : '';
+	$ao_so_year    = current_time( 'Y' );
+	?>
+	<div class="ao-so-signature">
+		<div class="ao-so-sign-left">
+			<strong>Danial Bakhtiari</strong>
+			<span><?php esc_html_e( 'توسعه‌دهندهٔ وردپرس', 'amazing-offer' ); ?></span>
+			<a href="https://danialbakhtiari.com" target="_blank" rel="noopener noreferrer">danialbakhtiari.com</a>
+		</div>
+		<div class="ao-so-sign-right">
+			<?php if ( $ao_so_version ) : ?>
+				<span class="ao-so-ver"><?php printf( esc_html__( 'نسخهٔ افزونه: %s', 'amazing-offer' ), esc_html( $ao_so_version ) ); ?></span>
+			<?php endif; ?>
+			<span class="ao-so-copy">
+				<?php
+				printf(
+					/* translators: %s: current year. */
+					esc_html__( '© %s Danial Bakhtiari — همهٔ حقوق محفوظ است.', 'amazing-offer' ),
+					esc_html( $ao_so_year )
+				);
+				?>
+			</span>
+		</div>
+	</div>
 </div>

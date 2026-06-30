@@ -137,6 +137,29 @@
 .ao-so-preview-stage[data-device="mobile"] { max-width: 390px; }
 .ao-so-preview-empty { color: #999; text-align: center; padding-top: 80px; }
 
+/* Creator signature */
+.ao-so-signature {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	margin-top: 20px;
+	padding: 16px 22px;
+	background: #fff;
+	border-radius: var(--ao-c-radius);
+	box-shadow: var(--ao-c-shadow);
+	border-top: 3px solid var(--ao-c-primary);
+	flex-wrap: wrap;
+}
+
+.ao-so-sign-left { display: flex; flex-direction: column; gap: 2px; }
+.ao-so-sign-left strong { font-size: 15px; color: var(--ao-c-dark); }
+.ao-so-sign-left span { font-size: 12px; color: #777; }
+.ao-so-sign-left a { font-size: 13px; color: var(--ao-c-primary); text-decoration: none; font-weight: 600; }
+.ao-so-sign-right { display: flex; flex-direction: column; gap: 4px; text-align: left; }
+.ao-so-ver { font-size: 12px; color: #555; }
+.ao-so-copy { font-size: 12px; color: #999; }
+
 @media screen and (max-width: 1100px) {
 	.ao-so-editor-layout { flex-direction: column; }
 	.ao-so-editor-preview { position: static; width: 100%; }

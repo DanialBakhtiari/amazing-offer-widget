@@ -236,7 +236,10 @@ class Amazing_Offer_SO_Admin {
 	 */
 	public function ajax_duplicate() {
 		$this->verify();
-		$id  = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0;
+		$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0;
+		if ( ! $id || ! $this->repository->get( $id ) || ! current_user_can( 'edit_post', $id ) ) {
+			wp_send_json_error( array( 'message' => __( 'اجازهٔ تکثیر این طرح را ندارید.', 'amazing-offer' ) ), 403 );
+		}
 		$new = $this->repository->duplicate( $id );
 		if ( is_wp_error( $new ) || ! $new ) {
 			wp_send_json_error( array( 'message' => __( 'تکثیر ناموفق بود.', 'amazing-offer' ) ) );
@@ -252,6 +255,9 @@ class Amazing_Offer_SO_Admin {
 	public function ajax_delete() {
 		$this->verify();
 		$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0;
+		if ( ! $id || ! current_user_can( 'delete_post', $id ) ) {
+			wp_send_json_error( array( 'message' => __( 'اجازهٔ حذف این طرح را ندارید.', 'amazing-offer' ) ), 403 );
+		}
 		if ( $this->repository->delete( $id ) ) {
 			wp_send_json_success();
 		}
@@ -265,7 +271,10 @@ class Amazing_Offer_SO_Admin {
 	 */
 	public function ajax_toggle() {
 		$this->verify();
-		$id     = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0;
+		$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0;
+		if ( ! $id || ! current_user_can( 'edit_post', $id ) ) {
+			wp_send_json_error( array( 'message' => __( 'اجازهٔ تغییر این طرح را ندارید.', 'amazing-offer' ) ), 403 );
+		}
 		$active = ! empty( $_POST['active'] ) && 'false' !== $_POST['active'];
 		if ( $this->repository->set_status( $id, $active ) ) {
 			wp_send_json_success( array( 'active' => $active ) );
@@ -299,6 +308,9 @@ class Amazing_Offer_SO_Admin {
 		$id = isset( $_POST['id'] ) ? absint( $_POST['id'] ) : 0;
 		if ( ! $id || ! $this->repository->get( $id ) ) {
 			wp_send_json_error( array( 'message' => __( 'طرح یافت نشد.', 'amazing-offer' ) ) );
+		}
+		if ( ! current_user_can( 'edit_post', $id ) ) {
+			wp_send_json_error( array( 'message' => __( 'اجازهٔ ویرایش این طرح را ندارید.', 'amazing-offer' ) ), 403 );
 		}
 
 		// Update the internal title.
@@ -353,8 +365,8 @@ class Amazing_Offer_SO_Admin {
 		$id = isset( $_GET['id'] ) ? absint( $_GET['id'] ) : 0;
 		check_admin_referer( 'ao_so_export_' . $id );
 
-		if ( ! $this->repository->get( $id ) ) {
-			wp_die( esc_html__( 'طرح یافت نشد.', 'amazing-offer' ) );
+		if ( ! $this->repository->get( $id ) || ! current_user_can( 'edit_post', $id ) ) {
+			wp_die( esc_html__( 'اجازهٔ دسترسی به این طرح را ندارید.', 'amazing-offer' ) );
 		}
 
 		$json = Amazing_Offer_SO_Export::to_json( $id );

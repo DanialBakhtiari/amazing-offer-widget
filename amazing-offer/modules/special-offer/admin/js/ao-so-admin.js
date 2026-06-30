@@ -211,12 +211,16 @@
 						$( '#ao-so-sale-results' ).html( '<p>' + esc( i18n.noResults ) + '</p>' );
 						return;
 					}
-					var html = '';
+					// Build elements and attach the product via jQuery .data()
+					// (NOT a DOM attribute) so product names can never break out.
+					var $wrap = $( '#ao-so-sale-results' ).empty();
 					res.data.products.forEach( function ( p ) {
-						html += '<button type="button" class="ao-so-sale-item" data-product=\'' + esc( JSON.stringify( p ) ) + '\'>' +
-							'<img src="' + esc( p.image ) + '" alt=""><span>' + esc( p.name ) + '</span></button>';
+						var $b = $( '<button type="button" class="ao-so-sale-item"><img alt=""><span></span></button>' );
+						$b.find( 'img' ).attr( 'src', p.image );
+						$b.find( 'span' ).text( p.name );
+						$b.data( 'product', p );
+						$wrap.append( $b );
 					} );
-					$( '#ao-so-sale-results' ).html( html );
 				} )
 				.always( function () { $btn.prop( 'disabled', false ); } );
 		} );
@@ -241,18 +245,23 @@
 						$( '#ao-so-search-results' ).addClass( 'is-open' ).html( '<div class="ao-so-search-item">' + esc( i18n.noResults ) + '</div>' );
 						return;
 					}
-					var html = '';
+					var $results = $( '#ao-so-search-results' ).empty().addClass( 'is-open' );
 					res.data.products.forEach( function ( p ) {
-						html += '<div class="ao-so-search-item" data-product=\'' + esc( JSON.stringify( p ) ) + '\'>' +
-							'<img src="' + esc( p.image ) + '" alt=""><span>' + esc( p.name ) + '</span></div>';
+						var $it = $( '<div class="ao-so-search-item"><img alt=""><span></span></div>' );
+						$it.find( 'img' ).attr( 'src', p.image );
+						$it.find( 'span' ).text( p.name );
+						$it.data( 'product', p );
+						$results.append( $it );
 					} );
-					$( '#ao-so-search-results' ).addClass( 'is-open' ).html( html );
 				} );
 			}, 300 );
 		} );
-		$editor.on( 'click', '.ao-so-search-item[data-product]', function () {
+		$editor.on( 'click', '.ao-so-search-item', function () {
 			var p = $( this ).data( 'product' );
-			if ( p && ! addSelected( p ) ) {
+			if ( ! p ) {
+				return; // the "no results" row carries no product data.
+			}
+			if ( ! addSelected( p ) ) {
 				window.alert( i18n.alreadyAdded );
 			}
 			$( '#ao-so-search-results' ).removeClass( 'is-open' ).empty();
