@@ -24,6 +24,7 @@ require_once AMAZING_OFFER_SO_DIR . 'includes/class-amazing-offer-so-render.php'
 require_once AMAZING_OFFER_SO_DIR . 'public/class-amazing-offer-so-public.php';
 
 require_once AMAZING_OFFER_SO_DIR . 'includes/class-amazing-offer-so-export.php';
+require_once AMAZING_OFFER_SO_DIR . 'block/class-amazing-offer-so-block.php';
 
 if ( is_admin() ) {
 	require_once AMAZING_OFFER_SO_DIR . 'admin/class-amazing-offer-so-admin.php';
@@ -98,6 +99,49 @@ class Amazing_Offer_SO_Module {
 			$admin = new Amazing_Offer_SO_Admin( $this->settings, $this->products, $this->repository );
 			$admin->register_hooks();
 		}
+
+		// Gutenberg block (server-rendered).
+		$block = new Amazing_Offer_SO_Block( $this->settings, $this->products, $this->repository );
+		$block->register_hooks();
+
+		// Elementor widget (reuse the existing category, never re-add it blindly).
+		if ( amazing_offer_is_elementor_active() ) {
+			add_action( 'elementor/elements/categories_registered', array( $this, 'register_elementor_category' ) );
+			add_action( 'elementor/widgets/register', array( $this, 'register_elementor_widget' ) );
+		}
+	}
+
+	/**
+	 * Register the Elementor category only if it does not already exist.
+	 *
+	 * @param \Elementor\Elements_Manager $manager Elements manager.
+	 * @return void
+	 */
+	public function register_elementor_category( $manager ) {
+		$existing = method_exists( $manager, 'get_categories' ) ? $manager->get_categories() : array();
+		if ( isset( $existing['amazing-offer'] ) ) {
+			return;
+		}
+		$manager->add_category(
+			'amazing-offer',
+			array(
+				'title' => __( 'Amazing Offer', 'amazing-offer' ),
+				'icon'  => 'eicon-price-list',
+			)
+		);
+	}
+
+	/**
+	 * Register the Special Offer Elementor widget.
+	 *
+	 * @param \Elementor\Widgets_Manager $manager Widgets manager.
+	 * @return void
+	 */
+	public function register_elementor_widget( $manager ) {
+		require_once AMAZING_OFFER_SO_DIR . 'elementor/class-widget-amazing-offer-special.php';
+		$widget = new Widget_Amazing_Offer_Special();
+		$widget->set_dependencies( $this->settings, $this->products, $this->repository );
+		$manager->register( $widget );
 	}
 
 	/**
