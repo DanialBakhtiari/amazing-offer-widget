@@ -5,6 +5,17 @@ All notable changes to **Amazing Offer Widget** are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](https://semver.org/).
 
+## [1.1.1] - 2026-06-30
+
+### Added
+- Special Offer: a configurable **"See all"** header button (toggle, custom
+  text and link).
+- Special Offer: **configurable line-clamp** for the card title (1–3 lines) and
+  an optional **short-description** block (1–4 lines), each with a fixed height
+  so cards stay equal regardless of content length.
+- Core `get_product_data()` now also returns `short_description` (additive;
+  legacy output unaffected).
+
 ## [1.1.0] - 2026-06-30
 
 ### Added

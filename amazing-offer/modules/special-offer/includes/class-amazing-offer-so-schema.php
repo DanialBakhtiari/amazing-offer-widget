@@ -61,6 +61,16 @@ class Amazing_Offer_SO_Schema {
 		$extra = array(
 			'_schema'    => self::SCHEMA_VERSION,
 			'effect'     => 'slide',
+
+			// "See all" header button.
+			'show_see_all' => false,
+			'see_all_text' => 'دیدن همه',
+			'see_all_url'  => '',
+
+			// Card text clamping (keeps every card the same height).
+			'title_lines'      => 2,
+			'show_description' => false,
+			'desc_lines'       => 2,
 			'style'      => array(
 				'radius'  => 12,
 				'gap'     => 16,
@@ -105,6 +115,16 @@ class Amazing_Offer_SO_Schema {
 		$clean['effect'] = ( isset( $input['effect'] ) && in_array( $input['effect'], self::effects(), true ) )
 			? $input['effect']
 			: 'slide';
+
+		// "See all" button.
+		$clean['show_see_all'] = ! empty( $input['show_see_all'] ) && 'false' !== $input['show_see_all'];
+		$clean['see_all_text'] = isset( $input['see_all_text'] ) ? sanitize_text_field( $input['see_all_text'] ) : 'دیدن همه';
+		$clean['see_all_url']  = isset( $input['see_all_url'] ) ? esc_url_raw( $input['see_all_url'] ) : '';
+
+		// Card text clamping.
+		$clean['title_lines']      = isset( $input['title_lines'] ) ? max( 1, min( 3, absint( $input['title_lines'] ) ) ) : 2;
+		$clean['show_description'] = ! empty( $input['show_description'] ) && 'false' !== $input['show_description'];
+		$clean['desc_lines']       = isset( $input['desc_lines'] ) ? max( 1, min( 4, absint( $input['desc_lines'] ) ) ) : 2;
 
 		// Style block.
 		$style          = ( isset( $input['style'] ) && is_array( $input['style'] ) ) ? $input['style'] : array();

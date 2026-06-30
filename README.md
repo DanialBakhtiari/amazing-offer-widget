@@ -7,7 +7,7 @@
 </div>
 
 <p align="center">
-  <img alt="Version"      src="https://img.shields.io/badge/version-1.1.0-e04a1f.svg">
+  <img alt="Version"      src="https://img.shields.io/badge/version-1.1.1-e04a1f.svg">
   <img alt="WordPress"    src="https://img.shields.io/badge/WordPress-6.0%2B-21759b.svg">
   <img alt="WooCommerce"  src="https://img.shields.io/badge/WooCommerce-7.0%2B-96588a.svg">
   <img alt="Elementor"    src="https://img.shields.io/badge/Elementor-3.0%2B-92003b.svg">
@@ -42,6 +42,7 @@
 - 🎞️ افکت‌های **Swiper 11** (لوکال): `slide` / `fade` / `coverflow` / `cards` + گرید
 - 🛍️ منابع محصول: انتخاب دستی / همه‌ی تخفیف‌دارها / دسته
 - 🖼️ بنر تبلیغاتی، رنگ/گرادیان، شخصی‌سازی کارت، **override ریسپانسیو** هر بریک‌پوینت
+- 🔘 دکمهٔ **«دیدن همه»** + **line-clamp قابل تنظیم** عنوان/توضیحات (هم‌ارتفاعی کارت‌ها)
 - 📤 **Export / Import** هر طرح به JSON
 - 🔌 سه خروجی با یک renderer مشترک: شورت‌کد `[special_offer id="N"]`، **بلوک گوتنبرگ**، **ویجت المنتور**
 - 🔍 JSON-LD اختیاری برای سئو · ♿ a11y و `prefers-reduced-motion`

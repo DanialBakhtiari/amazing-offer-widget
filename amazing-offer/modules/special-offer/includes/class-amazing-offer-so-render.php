@@ -117,6 +117,12 @@ class Amazing_Offer_SO_Render {
 					<?php if ( ! empty( $config['subtitle'] ) ) : ?>
 						<p class="ao-so-subtitle"><?php echo esc_html( $config['subtitle'] ); ?></p>
 					<?php endif; ?>
+					<?php if ( ! empty( $config['show_see_all'] ) && '' !== $config['see_all_text'] ) : ?>
+						<a class="ao-so-see-all" href="<?php echo esc_url( $config['see_all_url'] ? $config['see_all_url'] : '#' ); ?>">
+							<?php echo esc_html( $config['see_all_text'] ); ?>
+							<span class="dashicons dashicons-arrow-left-alt2" aria-hidden="true"></span>
+						</a>
+					<?php endif; ?>
 				</div>
 
 				<?php if ( ! empty( $config['show_timer'] ) ) : ?>
@@ -208,7 +214,10 @@ class Amazing_Offer_SO_Render {
 				</a>
 			</div>
 			<div class="ao-so-card-body">
-				<h3 class="ao-so-card-title"><a href="<?php echo esc_url( $item['permalink'] ); ?>"><?php echo esc_html( $item['name'] ); ?></a></h3>
+				<h3 class="ao-so-card-title" style="-webkit-line-clamp:<?php echo (int) $config['title_lines']; ?>;min-height:<?php echo esc_attr( 1.5 * (int) $config['title_lines'] ); ?>em;"><a href="<?php echo esc_url( $item['permalink'] ); ?>"><?php echo esc_html( $item['name'] ); ?></a></h3>
+				<?php if ( ! empty( $config['show_description'] ) && ! empty( $item['short_description'] ) ) : ?>
+					<div class="ao-so-card-desc" style="-webkit-line-clamp:<?php echo (int) $config['desc_lines']; ?>;min-height:<?php echo esc_attr( 1.4 * (int) $config['desc_lines'] ); ?>em;"><?php echo esc_html( wp_strip_all_tags( $item['short_description'] ) ); ?></div>
+				<?php endif; ?>
 				<div class="ao-so-card-price">
 					<?php if ( ! empty( $config['show_original_price'] ) && $item['regular_price'] > $item['sale_price'] && $item['sale_price'] > 0 ) : ?>
 						<del class="ao-so-regular-price"><?php echo wp_kses_post( $item['regular_price_html'] ); ?></del>

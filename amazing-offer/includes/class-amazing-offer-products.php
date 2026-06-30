@@ -195,6 +195,7 @@ class Amazing_Offer_Products {
 			'is_purchasable'   => $product->is_purchasable() && $product->is_in_stock(),
 			'is_on_sale'       => $product->is_on_sale(),
 			'type'             => $product->get_type(),
+			'short_description' => $product->get_short_description(),
 		);
 	}
 

@@ -159,6 +159,16 @@ $resp_t   = $config['responsive']['tablet'];
 				<div class="ao-so-field ao-so-field-inline"><label><?php esc_html_e( 'رنگ پس‌زمینهٔ بخش (اختیاری)', 'amazing-offer' ); ?></label><input type="text" class="ao-so-color" name="config[style][section_bg]" value="<?php echo esc_attr( $style['section_bg'] ); ?>"></div>
 				<div class="ao-so-field"><label><?php esc_html_e( 'گردی گوشهٔ کارت (px)', 'amazing-offer' ); ?></label><input type="number" min="0" max="60" name="config[style][radius]" value="<?php echo esc_attr( $style['radius'] ); ?>"></div>
 				<div class="ao-so-field"><label><?php esc_html_e( 'فاصلهٔ بین کارت‌ها (px)', 'amazing-offer' ); ?></label><input type="number" min="0" max="80" name="config[style][gap]" value="<?php echo esc_attr( $style['gap'] ); ?>"></div>
+
+				<h3><?php esc_html_e( 'متن کارت', 'amazing-offer' ); ?></h3>
+				<div class="ao-so-field"><label><?php esc_html_e( 'تعداد خط عنوان (۱ تا ۳)', 'amazing-offer' ); ?></label><input type="number" min="1" max="3" name="config[title_lines]" value="<?php echo esc_attr( $config['title_lines'] ); ?>"></div>
+				<div class="ao-so-field ao-so-field-inline"><label><?php esc_html_e( 'نمایش توضیحات کوتاه محصول', 'amazing-offer' ); ?></label><?php $ao_toggle( 'config[show_description]', $config['show_description'] ); ?></div>
+				<div class="ao-so-field"><label><?php esc_html_e( 'تعداد خط توضیحات (۱ تا ۴)', 'amazing-offer' ); ?></label><input type="number" min="1" max="4" name="config[desc_lines]" value="<?php echo esc_attr( $config['desc_lines'] ); ?>"></div>
+
+				<h3><?php esc_html_e( 'دکمهٔ «دیدن همه»', 'amazing-offer' ); ?></h3>
+				<div class="ao-so-field ao-so-field-inline"><label><?php esc_html_e( 'نمایش دکمه', 'amazing-offer' ); ?></label><?php $ao_toggle( 'config[show_see_all]', $config['show_see_all'] ); ?></div>
+				<div class="ao-so-field"><label><?php esc_html_e( 'متن دکمه', 'amazing-offer' ); ?></label><input type="text" name="config[see_all_text]" value="<?php echo esc_attr( $config['see_all_text'] ); ?>"></div>
+				<div class="ao-so-field"><label><?php esc_html_e( 'لینک دکمه', 'amazing-offer' ); ?></label><input type="url" name="config[see_all_url]" value="<?php echo esc_attr( $config['see_all_url'] ); ?>"></div>
 			</section>
 
 			<!-- Slider -->

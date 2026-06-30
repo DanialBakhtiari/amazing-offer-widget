@@ -62,6 +62,32 @@
 	font-size: 0.9em;
 }
 
+.ao-so-see-all {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	margin-top: 8px;
+	padding: 5px 14px;
+	border-radius: 20px;
+	background: var(--ao-primary);
+	color: #fff;
+	text-decoration: none;
+	font-size: 0.82em;
+	font-weight: 600;
+	transition: background 0.2s ease;
+}
+
+.ao-so-see-all:hover {
+	background: var(--ao-primary-hover);
+	color: #fff;
+}
+
+.ao-so-see-all .dashicons {
+	font-size: 15px;
+	width: 15px;
+	height: 15px;
+}
+
 /* Timer */
 .ao-so-timer {
 	display: flex;
@@ -215,6 +241,17 @@
 
 .ao-so-card-title a:hover {
 	color: var(--ao-primary-hover);
+}
+
+/* Description: configurable line-clamp, fixed height for equal cards */
+.ao-so-card-desc {
+	margin: 0;
+	font-size: 0.82em;
+	line-height: 1.4;
+	color: #777;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
 }
 
 .ao-so-card-price {
